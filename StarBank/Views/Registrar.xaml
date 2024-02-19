@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StarBank.Views.Registrar"
+             Title="Registrar">
+    <Grid VerticalOptions="Start" HorizontalOptions="Center" Margin="0,0,0,0">
+
+        <Grid VerticalOptions="StartAndExpand" >
+
+            <!-- Imagen de fondo -->
+            <Image Aspect="AspectFill" Source="alta.png"/>
+
+            <!-- Contenedor para el cuadro blanco -->
+
+        </Grid>
+
+        <!-- Cuadro blanco con esquinas redondeadas -->
+        <Frame WidthRequest="275" HeightRequest="530" BackgroundColor="White" CornerRadius="25" Margin="0,200,0,0">
+            <StackLayout  VerticalOptions="StartAndExpand" HorizontalOptions="Center">
+                <!-- Título "Login" -->
+                <Label Text="Registrar Cuenta" TextColor="#2F7142" FontSize="20" FontFamily="Mplus 1p" FontAttributes="Bold" HorizontalOptions="Center"/>
+
+                <!--nombre, Apellidos, correo, telefono, N° Identificación y crear contraseña y confirmar contraseña -->
+
+                <!-- Entry para el Nombre -->
+                <Entry x:Name="txt_nombre" Placeholder="Nombre" PlaceholderColor="#999999" WidthRequest="192" HeightRequest="35" FontSize="14" FontFamily="Mplus 1p" Margin="0,20,0,0"/>
+                <!-- Aumenté el margen superior para separarlo más del título -->
+
+                <!-- Entry para el Apellidos -->
+                <Entry x:Name="txt_apellidos" Placeholder="Apellidos" PlaceholderColor="#999999" WidthRequest="192" HeightRequest="35" FontSize="14" FontFamily="Mplus 1p" Margin="0,20,0,0"/>
+                <!-- Aumenté el margen superior para separarlo más del título -->
+
+                <!-- Entry para el Identificacion -->
+                <Entry x:Name="txt_identidad" Placeholder="N° Identificación" PlaceholderColor="#999999" WidthRequest="192" HeightRequest="35" FontSize="14" FontFamily="Mplus 1p" Margin="0,20,0,0" Keyboard="Numeric"/>
+                <!-- Aumenté el margen superior para separarlo más del título -->
+
+                <!-- Entry para el Telefono -->
+                <Entry x:Name="txt_telefono" Placeholder="Telefono" PlaceholderColor="#999999" WidthRequest="192" HeightRequest="35" FontSize="14" FontFamily="Mplus 1p" Margin="0,20,0,0" Keyboard="Numeric"/>
+                <!-- Aumenté el margen superior para separarlo más del título -->
+
+                <!-- Entry para el correo electrónico -->
+                <Entry x:Name="txt_emailR" Placeholder="E-mail" PlaceholderColor="#999999" WidthRequest="192" HeightRequest="35" FontSize="14" FontFamily="Mplus 1p" Margin="0,20,0,0" Keyboard="Email"/>
+                <!-- Aumenté el margen superior para separarlo más del título -->
+
+                <!-- Entry para la contraseña -->
+                <Entry x:Name="txt_passwordR" Placeholder="Contraseña" PlaceholderColor="#999999" IsPassword="True" WidthRequest="192" HeightRequest="35" FontSize="14" FontFamily="Mplus 1p" Margin="0,20,0,0"/>
+                <!-- Disminuí el margen superior para separarlo menos del campo de correo electrónico -->
+
+                <!-- Entry para la confirmar contraseña -->
+                <Entry x:Name="txt_passwordRC" Placeholder="Confirmar Contraseña" PlaceholderColor="#999999" IsPassword="True" WidthRequest="192" HeightRequest="35" FontSize="14" FontFamily="Mplus 1p" Margin="0,20,0,0"/>
+                <!-- Disminuí el margen superior para separarlo menos del campo de correo electrónico -->
+
+                <!-- Botón "Iniciar Sesión" -->
+                <Button x:Name="btn_registrarcuenta" Clicked="btn_registrarcuenta_Clicked" Text="Crear Cuenta" TextColor="White" WidthRequest="193" HeightRequest="35" FontSize="13" FontFamily="Mplus 1p" FontAttributes="Bold" BackgroundColor="#2F7142" BorderColor="#2F7142" BorderWidth="1" Margin="0,15,0,0" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <!-- Disminuí el margen superior para reducir el espacio entre el botón y los campos de entrada -->
+
+                <!-- Label "Olvidaste tu Contraseña?" -->
+                <Label x:Name="lb_irlogin" Text="Ya tienes una cuenta?" TextColor="#0975F4" FontSize="11" FontFamily="Mplus 1p" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,5,0,0">
+                    <!-- Crea el CLICKED del LABEL-->
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="irLogin"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <!-- Disminuí el margen superior para reducir el espacio entre el botón y el label de abajo -->
+            </StackLayout>
+        </Frame>
+    </Grid>
+
+
+    <!-- Establecer el color de fondo -->
+    <ContentPage.BackgroundColor>
+        <Color>#E0E0E0</Color>
+        <!-- Color gris claro en formato hexadecimal -->
+    </ContentPage.BackgroundColor>
+</ContentPage>
