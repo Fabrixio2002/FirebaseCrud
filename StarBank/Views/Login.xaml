@@ -37,7 +37,11 @@
                 <!-- Disminuí el margen superior para reducir el espacio entre el botón y los campos de entrada -->
 
                 <!-- Label "Olvidaste tu Contraseña?" -->
-                <Label Text="Olvidaste tu Contraseña?" TextColor="#0975F4" FontSize="11" FontFamily="Mplus 1p" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,5,0,0"/>
+                <Label Text="Olvidaste tu Contraseña?" TextColor="#0975F4" FontSize="11" FontFamily="Mplus 1p" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,5,0,0" >
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
                 <!-- Disminuí el margen superior para reducir el espacio entre el botón y el label de abajo -->
             </StackLayout>
         </Frame>

@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using Firebase.Database;
+using Firebase.Database.Query;
+using StarBank.Models;
 
 namespace StarBank
 {
@@ -18,8 +21,15 @@ namespace StarBank
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-
-            return builder.Build();
+        
+                return builder.Build();
         }
+
+    
+
+
+
+
+
     }
 }

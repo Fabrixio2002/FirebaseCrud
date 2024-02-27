@@ -58,16 +58,22 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\alta.png" />
+	  <None Remove="Resources\Images\home.png" />
+	  <None Remove="Resources\Images\iconologin.png" />
+	  <None Remove="Resources\Images\perfil.png" />
+	  <None Remove="Resources\Images\salir.png" />
+	  <None Remove="Resources\Images\userinop.png" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="FirebaseAdmin" Version="2.4.0" />
 		<PackageReference Include="FirebaseAuth" Version="2.0.6" />
 		<PackageReference Include="FirebaseAuthentication.net" Version="4.1.0" />
+		<PackageReference Include="FirebaseDatabase.net" Version="4.2.0" />
+		<PackageReference Include="MailKit" Version="4.3.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.7" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.7" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-		<PackageReference Include="Plugin.FirebaseAuth" Version="4.1.0" />
 	</ItemGroup>
 
 	<ItemGroup>
