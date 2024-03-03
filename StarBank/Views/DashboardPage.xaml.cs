@@ -8,12 +8,23 @@ public partial class DashboardPage : ContentPage
 {
     ConexionFirebase conexionFirebase = new ConexionFirebase();
     private String Usuario;
+    private String Apellido;
+    private String Cuenta;
+    private String dinero;
     private String ID;
-    public  DashboardPage(String Nombre)
+    public DashboardPage(String userString, String name,String apellido,String cuenta,String saldo)
     {
         InitializeComponent();
         NavigationPage.SetHasNavigationBar(this, false);//ELIMINA EL TOOLBAR
-        Usuario = Nombre;
+        Usuario = name;
+        Apellido = apellido;
+        Cuenta = cuenta;
+        dinero = saldo;
+        ID = userString;
+        txtBienvenida.Text = "Bienvenido " +Usuario+""+Apellido;
+        txtCuenta.Text = cuenta;
+        saldoActual.Text= "L."+saldo;
+
     }
 
 
@@ -22,9 +33,11 @@ public partial class DashboardPage : ContentPage
 
     }
 
-    private void btn_pagar_Clicked(object sender, EventArgs e)
+    private async void btn_pagar_Clicked(object sender, EventArgs e)
     {
-        DisplayAlert("", ""+ Usuario, "xd");
+         await conexionFirebase.ActualizarDatoUsuario(ID, "Saldo", "700");
+       
+
     }
 
     private void btn_transferencias_Clicked(object sender, EventArgs e)

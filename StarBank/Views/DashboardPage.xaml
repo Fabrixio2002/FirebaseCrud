@@ -15,19 +15,19 @@
 
         <!-- bienvenido -->
         <StackLayout Orientation="Horizontal" BackgroundColor="#2F7142" HeightRequest="45">
-            <Label Text="Bienvenido Nombre Usuario"  VerticalOptions="Start" HorizontalOptions="CenterAndExpand" TextColor="#FFFFFF" FontSize="18" FontAttributes="Bold" FontFamily="Mplus 1p" Margin="0,10,0,0"/>
+            <Label x:Name="txtBienvenida"  VerticalOptions="Start" HorizontalOptions="CenterAndExpand" TextColor="#FFFFFF" FontSize="18" FontAttributes="Bold" FontFamily="Mplus 1p" Margin="0,10,0,0"/>
         </StackLayout>
 
         <!-- Datos de cuenta -->
         <StackLayout Orientation="Horizontal" BackgroundColor="#2F7142" HeightRequest="50">
             <StackLayout HorizontalOptions="StartAndExpand">
                 <Label Text="N° Cuenta:" VerticalOptions="Center" HorizontalOptions="StartAndExpand" TextColor="#FFFFFF" FontSize="14" FontFamily="Mplus 1p" Margin="10,0"/>
-                <Label Text="202010110060" VerticalOptions="Center" HorizontalOptions="StartAndExpand" TextColor="#FFFFFF" FontSize="14" FontFamily="Mplus 1p" Margin="10,0"/>
+                <Label x:Name="txtCuenta" VerticalOptions="Center" HorizontalOptions="StartAndExpand" TextColor="#FFFFFF" FontSize="14" FontFamily="Mplus 1p" Margin="10,0"/>
             </StackLayout>
 
             <StackLayout HorizontalOptions="EndAndExpand">
                 <Label Text="Saldo:" VerticalOptions="Center" HorizontalOptions="EndAndExpand" TextColor="#FFFFFF" FontSize="14" FontFamily="Mplus 1p" Margin="10,0"/>
-                <Label Text="L. 23243.34" VerticalOptions="Center" HorizontalOptions="EndAndExpand" TextColor="#FFFFFF" FontSize="14" FontFamily="Mplus 1p" Margin="10,0"/>
+                <Label x:Name="saldoActual" VerticalOptions="Center" HorizontalOptions="EndAndExpand" TextColor="#FFFFFF" FontSize="14" FontFamily="Mplus 1p" Margin="10,0"/>
             </StackLayout>
         </StackLayout>
 

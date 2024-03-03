@@ -18,6 +18,7 @@ namespace StarBank.Models
         public String DNI { get; set; }
         public String Telefono { get; set; }
         public String N_Cuenta { get; set; }
+        public String Saldo { get; set; }
 
 
     }

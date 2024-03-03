@@ -66,8 +66,13 @@ namespace StarBank
                 var userId = await BuscarCorreoEnBaseDeDatos(Email);
                 String userString = userId.ToString();
 
-                var nombreUsuario = await GetNombreUsuarioPorId(userString);
-                await Application.Current.MainPage.Navigation.PushAsync(new Views.DashboardPage(nombreUsuario.ToString()));
+                var nombreUsuario = await GetNombreUsuarioPorId(userString, "Nombre");
+                var apellidoUsuario = await GetNombreUsuarioPorId(userString, "Apellidos");
+                var cuenta = await GetNombreUsuarioPorId(userString, "N_Cuenta");
+                var saldo = await GetNombreUsuarioPorId(userString, "Saldo");
+
+
+                await Application.Current.MainPage.Navigation.PushAsync(new Views.DashboardPage(userId.ToString(), nombreUsuario,apellidoUsuario,cuenta,saldo));
 
 
                 return userCredential;
@@ -127,14 +132,15 @@ namespace StarBank
 
 
 
-        public async Task<string> GetNombreUsuarioPorId(string idUsuario)
+        public async Task<string> GetNombreUsuarioPorId(string idUsuario,String nombreDato)
         {
             try
             {
                 var snapshot = await client.Child("Usuarios").Child(idUsuario).OnceSingleAsync<Usuarios>();
+                var propiedad = typeof(Usuarios).GetProperty(nombreDato);
                 if (snapshot != null)
                 {
-                    return snapshot.Nombre;
+                    return propiedad.GetValue(snapshot).ToString(); // Convertir el objeto al tipo string
                 }
                 else
                 {
@@ -148,11 +154,31 @@ namespace StarBank
                 return "Error al recuperar nombre de usuario";
             }
         }
+
+        public async Task ActualizarDatoUsuario(string idUsuario, string nombreDato, string nuevoValor)
+        {
+            try
+            {
+                // Construir la ruta completa al nodo que contiene el dato que deseas actualizar
+                var rutaNodo = $"Usuarios/{idUsuario}/{nombreDato}";
+               
+                // Actualizar el dato utilizando PutAsync
+                await client.Child(rutaNodo).PutAsync(nuevoValor);
+                Console.WriteLine($"Dato {nombreDato} actualizado correctamente para el usuario con ID {idUsuario}");
+            }
+            catch (Exception ex)
+            {
+                // Manejar errores
+                Console.WriteLine($"Error al actualizar el dato: {ex.Message}");
+            }
+        }
+
+
+
     }
 
 
-
-
+ 
     internal class FirebaseConfig
         {
             private string v;

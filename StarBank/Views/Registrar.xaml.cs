@@ -232,9 +232,9 @@ public partial class Registrar : ContentPage
         //Nos pide el nelace de nuestra base de datos :D
         FirebaseClient user = new FirebaseClient("https://proyectostarbank-default-rtdb.firebaseio.com/");
         var usuario = user.Child("Usuarios").OnceAsync<Usuarios>();
-
+        String saldo = "0";
     
-         user.Child("Usuarios").PostAsync(new Usuarios { Nombre =name, Apellidos = apellido,DNI=identidad,Telefono=telefono,Correo=correo,N_Cuenta=Cuenta });
+         user.Child("Usuarios").PostAsync(new Usuarios { Nombre =name, Apellidos = apellido,DNI=identidad,Telefono=telefono,Correo=correo,N_Cuenta=Cuenta, Saldo=saldo });
         
     }
 
