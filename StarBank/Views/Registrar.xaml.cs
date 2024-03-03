@@ -67,7 +67,7 @@ public partial class Registrar : ContentPage
                 return; // Salimos del método si la contraseña es demasiado corta
             }
             //Condicion para verificar el confirmar contraseña.
-            if (contrasenia == contra2 || contrasenia.Length > 6)
+            if (contrasenia == contra2 )
             {
                 // Lógica adicional aquí si la contraseña cumple con los requisitos
                 string codigoGenerado = GenerarCodigoAleatorio();
@@ -91,10 +91,12 @@ public partial class Registrar : ContentPage
                     if (result == codigoGenerado)
                     {
                         codigoCorrecto = true;
+
                     }
                     else
                     {
-                        await DisplayAlert("StarBank", "¡ERROR EN EL CODIGO DE VERIFICACION!", "OK");
+                        await DisplayAlert("StarBank", "¡ERROR EN EL CODIGO DE VERIFICACION! Genera Otro Codigo", "OK");
+                        return;
                     }
 
 
@@ -154,6 +156,9 @@ public partial class Registrar : ContentPage
         }
     }
 
+
+
+
     //Clase para hacer el codigo de verificacion es de manera ramdon asi que siemppre sera diferenete
     //................ :D
     static string GenerarCodigoAleatorio()
@@ -178,6 +183,7 @@ public partial class Registrar : ContentPage
         return codigo;
     }
 
+
     //Metodo para limpiar los campos del formulario ;)
     public void limpiar(){
         txt_emailR.Text = string.Empty;
@@ -190,6 +196,8 @@ public partial class Registrar : ContentPage
     }
 
 
+
+    //GENERA NUMERO DE CUENTA
     public static class NumeroDeCuentaGenerator
     {
         private static int contador = 1;
@@ -216,7 +224,6 @@ public partial class Registrar : ContentPage
 
     //METODOS CRUD///
 
-  
     //METODO PARA AGREGAR
     public static void RegistrarUsuarios(String name, String apellido,String identidad,String telefono, String correo,String Cuenta)
     {
@@ -229,8 +236,6 @@ public partial class Registrar : ContentPage
     
          user.Child("Usuarios").PostAsync(new Usuarios { Nombre =name, Apellidos = apellido,DNI=identidad,Telefono=telefono,Correo=correo,N_Cuenta=Cuenta });
         
-
-
     }
 
 

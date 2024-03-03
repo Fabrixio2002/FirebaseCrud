@@ -1,10 +1,12 @@
 namespace StarBank.Views;
 using Firebase.Auth;
 using Firebase.Auth.Providers;
+using Firebase.Database;
 using Microsoft.Maui.ApplicationModel.Communication;
 
 public partial class Login : ContentPage
 {
+    ConexionFirebase conexionFirebase = new ConexionFirebase();
     string email;
     public Login()
 	{
@@ -15,7 +17,6 @@ public partial class Login : ContentPage
 
     private async void btn_iniciar_Clicked(object sender, EventArgs e)
     {
-        ConexionFirebase conexionFirebase = new ConexionFirebase();
          email = txt_email.Text;
         string password = txt_password.Text;
         if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
@@ -26,7 +27,6 @@ public partial class Login : ContentPage
         {
             var credenciales = await conexionFirebase.InicioSesion(email, password);
 
-
         }
     }
 
@@ -34,16 +34,26 @@ public partial class Login : ContentPage
     {
         Navigation.PushAsync(new Registrar());//Para cambiar de Pantalla
 
+
     }
 
+
+    //restablecer contra
     private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
 
         String gmail = txt_email.Text;
-        ConexionFirebase conexionFirebase = new ConexionFirebase();
-
-         await conexionFirebase.ContraseñaNueva(gmail);
-        await DisplayAlert("Restablecer Contraseña", "", "");
+        if(gmail==null)
+        {
+            await DisplayAlert("StarBank", "Ingrese un Correo Valido", "OK");
+        }
+        else
+        {
+            await conexionFirebase.ContraseñaNueva(gmail);
+            await DisplayAlert("Restablecer Contraseña", "", "");
+        }
+     
+        
 
     }
 }
