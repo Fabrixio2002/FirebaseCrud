@@ -7,23 +7,16 @@ namespace StarBank.Views;
 public partial class DashboardPage : ContentPage
 {
     ConexionFirebase conexionFirebase = new ConexionFirebase();
-    private String Usuario;
-    private String Apellido;
-    private String Cuenta;
-    private String dinero;
-    private String ID;
-    public DashboardPage(String userString, String name,String apellido,String cuenta,String saldo)
+ 
+    private string ID;
+
+    public  DashboardPage(String userString)
     {
+        ID = userString;
+        InicializarBienvenidaAsync(userString);
         InitializeComponent();
         NavigationPage.SetHasNavigationBar(this, false);//ELIMINA EL TOOLBAR
-        Usuario = name;
-        Apellido = apellido;
-        Cuenta = cuenta;
-        dinero = saldo;
-        ID = userString;
-        txtBienvenida.Text = "Bienvenido " +Usuario+""+Apellido;
-        txtCuenta.Text = cuenta;
-        saldoActual.Text= "L."+saldo;
+      
 
     }
 
@@ -33,16 +26,16 @@ public partial class DashboardPage : ContentPage
 
     }
 
-    private async void btn_pagar_Clicked(object sender, EventArgs e)
+    private  void btn_pagar_Clicked(object sender, EventArgs e)
     {
-         await conexionFirebase.ActualizarDatoUsuario(ID, "Saldo", "700");
        
 
     }
 
-    private void btn_transferencias_Clicked(object sender, EventArgs e)
+    private async void btn_transferencias_Clicked(object sender, EventArgs e)
     {
-
+        
+        await Navigation.PushAsync(new TransferPage(ID));
     }
 
     private void btn_control_Clicked(object sender, EventArgs e)
@@ -55,6 +48,18 @@ public partial class DashboardPage : ContentPage
         ConexionFirebase conexionFirebase = new ConexionFirebase();
         await conexionFirebase.CerrarSesion();
 
+    }
+
+    private async void InicializarBienvenidaAsync(string userString)
+    {
+        var nombreUsuario = await conexionFirebase.ObtenerDatosID<Usuarios>(userString, "Nombre", "Usuarios");
+        var ApellidoUsuario = await conexionFirebase.ObtenerDatosID<Usuarios>(userString, "Apellidos", "Usuarios");
+        var Saldo = await conexionFirebase.ObtenerDatosID<Usuarios>(userString, "Saldo", "Usuarios");
+        var cuenta = await conexionFirebase.ObtenerDatosID<Usuarios>(userString, "N_Cuenta", "Usuarios");
+        
+        txtCuenta.Text = cuenta;
+        saldoActual.Text = "L." + Saldo;
+        txtBienvenida.Text = "Bienvenido " + nombreUsuario + " " + ApellidoUsuario;
     }
 
 

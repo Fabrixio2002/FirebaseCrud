@@ -58,7 +58,9 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\alta.png" />
+	  <None Remove="Resources\Images\atrass.png" />
 	  <None Remove="Resources\Images\home.png" />
+	  <None Remove="Resources\Images\icono.png" />
 	  <None Remove="Resources\Images\iconologin.png" />
 	  <None Remove="Resources\Images\perfil.png" />
 	  <None Remove="Resources\Images\salir.png" />
@@ -77,10 +79,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\AggTarjetaPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Login.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Registrar.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\TransferPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

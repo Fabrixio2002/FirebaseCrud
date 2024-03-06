@@ -26,6 +26,8 @@ public partial class Login : ContentPage
         else 
         {
             var credenciales = await conexionFirebase.InicioSesion(email, password);
+            txt_email.Text = "";
+            txt_password.Text = "";
 
         }
     }
@@ -50,7 +52,7 @@ public partial class Login : ContentPage
         else
         {
             await conexionFirebase.ContraseñaNueva(gmail);
-            await DisplayAlert("Restablecer Contraseña", "", "");
+            await DisplayAlert("Restablecer Contraseña", "", "ok");
         }
      
         

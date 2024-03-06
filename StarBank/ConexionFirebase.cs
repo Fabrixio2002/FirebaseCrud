@@ -43,7 +43,7 @@ namespace StarBank
         }
 
 
-
+        //<CREAR USUARIO 
         public async Task<UserCredential> CrearUsuario(string Email, string Password)
         {
             var cliente = ConectarFirebase();
@@ -52,7 +52,7 @@ namespace StarBank
         }
 
 
-
+        //MANJEMOS EL INCIO DE SESION 
         public async Task<UserCredential> InicioSesion(string Email, string Password)
         {
             try
@@ -63,16 +63,13 @@ namespace StarBank
                 var userCredential = await cliente.SignInWithEmailAndPasswordAsync(Email, Password);
                 //OBTENEMOS EL ID DEL USUARIO QUE SE CONECTO
 
+                //oBTENEMOS EL USUARIO Y LO CONVERTIMOS EN UNA CADENA DE TEXTO 
                 var userId = await BuscarCorreoEnBaseDeDatos(Email);
                 String userString = userId.ToString();
 
-                var nombreUsuario = await GetNombreUsuarioPorId(userString, "Nombre");
-                var apellidoUsuario = await GetNombreUsuarioPorId(userString, "Apellidos");
-                var cuenta = await GetNombreUsuarioPorId(userString, "N_Cuenta");
-                var saldo = await GetNombreUsuarioPorId(userString, "Saldo");
 
-
-                await Application.Current.MainPage.Navigation.PushAsync(new Views.DashboardPage(userId.ToString(), nombreUsuario,apellidoUsuario,cuenta,saldo));
+                //CAMBIAMOS DE PAGINA Y LE MANDAMOS PARAMETROS DE LOS DATOS QUE NECESITAMOS
+                await Application.Current.MainPage.Navigation.PushAsync(new Views.DashboardPage(userId.ToString()));
 
 
                 return userCredential;
@@ -85,6 +82,7 @@ namespace StarBank
 
                 return null;
             }
+
         }
 
 
@@ -95,7 +93,9 @@ namespace StarBank
             {
                 var cliente = ConectarFirebase();
                 cliente.SignOut();
-                await Application.Current.MainPage.Navigation.PushAsync(new Views.Login()); // Redirigir a la página de inicio de sesión después de cerrar sesión
+                await Application.Current.MainPage.Navigation.PopToRootAsync();
+                await Application.Current.MainPage.Navigation.PushAsync(new Views.Login());// Redirigir a la página de inicio de sesión después de cerrar sesión
+
             }
             catch (FirebaseAuthException ex)
             {
@@ -105,6 +105,7 @@ namespace StarBank
         }
 
 
+        //Usamos un metodo de firebase para recuperar contraseña mediante el correo electronico
         public async Task ContraseñaNueva(String correo)
         {
             var cliente = ConectarFirebase();
@@ -113,6 +114,7 @@ namespace StarBank
         }
 
 
+        //Estamos buscando en nuestra base de datos nuestro correo y obtenemos nuestro id poara manejar los datos.
         public async Task<string> BuscarCorreoEnBaseDeDatos(string correo)
         {
             var usuarios = await client.Child("Usuarios").OnceAsync<Dictionary<string, string>>();
@@ -126,21 +128,48 @@ namespace StarBank
                 }
             }
 
-            return "xd";
+            return "no encontrado";
+        }
+
+        public async Task<string> BuscarTarjeta(string numeroTarjeta)
+        {
+            var tarjetas = await client.Child("Tarjetas").OnceAsync<Dictionary<string, string>>();
+            string userId = ""; // Inicializa userId con un valor predeterminado
+            foreach (var tarjeta in tarjetas)
+            {
+                if (tarjeta.Object["N_Tarjeta"] == numeroTarjeta)
+                {
+                    userId = tarjeta.Key;
+                    return userId;
+                }
+            }
+
+            return "No encontrado";
         }
 
 
 
 
-        public async Task<string> GetNombreUsuarioPorId(string idUsuario,String nombreDato)
+
+
+        //Metodo para obtener datos de la base de datos
+        public async Task<string> ObtenerDatosID<T>(string idUsuario,String nombreDato,String Nodo)
         {
             try
             {
-                var snapshot = await client.Child("Usuarios").Child(idUsuario).OnceSingleAsync<Usuarios>();
-                var propiedad = typeof(Usuarios).GetProperty(nombreDato);
+                var snapshot = await client.Child(Nodo).Child(idUsuario).OnceSingleAsync<T>();
+                var propiedad = typeof(T).GetProperty(nombreDato);
                 if (snapshot != null)
                 {
-                    return propiedad.GetValue(snapshot).ToString(); // Convertir el objeto al tipo string
+                    var valorPropiedad = propiedad.GetValue(snapshot); // Obtener el valor de la propiedad específica
+                    if (valorPropiedad != null)
+                    {
+                        return valorPropiedad.ToString(); // Convertir el objeto al tipo string
+                    }
+                    else
+                    {
+                        return "Nombre de usuario no encontrado";
+                    }
                 }
                 else
                 {
@@ -155,6 +184,7 @@ namespace StarBank
             }
         }
 
+        //Actualizamos algun campo de la base de datos
         public async Task ActualizarDatoUsuario(string idUsuario, string nombreDato, string nuevoValor)
         {
             try
@@ -173,12 +203,57 @@ namespace StarBank
             }
         }
 
+        public async Task ActualizarDatoTarjeta(string id, string nombreDato, string nuevoValor)
+        {
+            try
+            {
+                // Construir la ruta completa al nodo que contiene el dato que deseas actualizar
+                var rutaNodo = $"Tarjetas/{id}/{nombreDato}";
 
+                // Actualizar el dato utilizando PutAsync
+                await client.Child(rutaNodo).PutAsync(nuevoValor);
+                Console.WriteLine($"Dato {nombreDato} actualizado correctamente para el usuario con ID {id}");
+            }
+            catch (Exception ex)
+            {
+                // Manejar errores
+                Console.WriteLine($"Error al actualizar el dato: {ex.Message}");
+            }
+        }
+
+
+        public async Task RegistrarTransacciones(String Monto,String Tipo,String Fecha,String CuentaO,String CuentaD,String NombreENVIO,String NombreRecibe )
+        {
+            //Estamos diciendoa nuestra base de datos que añadiremos un usuario
+
+            //Nos pide el nelace de nuestra base de datos :D
+            FirebaseClient user = new FirebaseClient("https://proyectostarbank-default-rtdb.firebaseio.com/");
+            var usuario = user.Child("Transferencia").OnceAsync<Transacciones>();
+
+            user.Child("Transferencia").PostAsync(new Transacciones { Monto = Monto, Tipo = Tipo, Fecha = Fecha, CuentaO= CuentaO, CuentaD= CuentaD, NombreENVIO= NombreENVIO, NombreRecibe = NombreRecibe });
+
+        }
+
+        public async Task RegistrarTarjetas(String Numero, String Nombre,String Saldo)
+        {
+            //Estamos diciendoa nuestra base de datos que añadiremos un usuario
+
+            //Nos pide el nelace de nuestra base de datos :D
+            FirebaseClient user = new FirebaseClient("https://proyectostarbank-default-rtdb.firebaseio.com/");
+            var usuario = user.Child("Tarjetas").OnceAsync<Tarjetas>();
+
+            await user.Child("Tarjetas").PostAsync(new Tarjetas { N_Tarjeta=Numero,Nombre=Nombre,Saldo=Saldo});
+
+        }
+
+       
 
     }
 
 
  
+
+
     internal class FirebaseConfig
         {
             private string v;
