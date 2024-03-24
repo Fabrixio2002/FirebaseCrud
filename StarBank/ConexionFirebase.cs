@@ -131,6 +131,24 @@ namespace StarBank
             return "no encontrado";
         }
 
+
+        //Estamos buscando en nuestra base de datos nuestro correo y obtenemos nuestro id poara manejar los datos.
+        public async Task<string> BuscarIDEnBaseDeDatos(string cuenta)
+        {
+            var usuarios = await client.Child("Usuarios").OnceAsync<Dictionary<string, string>>();
+            string userId = ""; // Inicializa userId con un valor predeterminado
+            foreach (var usuario in usuarios)
+            {
+                if (usuario.Object["N_Cuenta"] == cuenta)
+                {
+                    userId = usuario.Key;
+                    return userId;
+                }
+            }
+
+            return "no encontrado";
+        }
+
         public async Task<string> BuscarTarjeta(string numeroTarjeta)
         {
             var tarjetas = await client.Child("Tarjetas").OnceAsync<Dictionary<string, string>>();
@@ -168,12 +186,12 @@ namespace StarBank
                     }
                     else
                     {
-                        return "Nombre de usuario no encontrado";
+                        return "";
                     }
                 }
                 else
                 {
-                    return "Nombre de usuario no encontrado";
+                    return "";
                 }
             }
             catch (Exception ex)
@@ -183,6 +201,10 @@ namespace StarBank
                 return "Error al recuperar nombre de usuario";
             }
         }
+
+
+
+
 
         //Actualizamos algun campo de la base de datos
         public async Task ActualizarDatoUsuario(string idUsuario, string nombreDato, string nuevoValor)

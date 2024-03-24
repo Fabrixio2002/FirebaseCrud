@@ -133,6 +133,9 @@ public partial class AggTarjetaPage : ContentPage
             ((Entry)sender).Text = digitsOnly;
     }
 
+
+
+
   
 
 }

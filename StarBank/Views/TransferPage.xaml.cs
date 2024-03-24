@@ -28,7 +28,7 @@ public partial class TransferPage : ContentPage
 
     private void btn_transfercuenta_Clicked(object sender, EventArgs e)
     {
-       // Navigation.PushAsync(new TransCuentaPage());//Para cambiar de Pantalla
+       Navigation.PushAsync(new TransCuentaPage(ID));//Para cambiar de Pantalla
     }
 
     private void btn_aggtarjeta_Clicked(object sender, EventArgs e)
