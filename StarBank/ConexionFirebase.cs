@@ -165,6 +165,22 @@ namespace StarBank
             return "No encontrado";
         }
 
+        public async Task<string> BuscarFactura(string NumeroFactura)
+        {
+            var tarjetas = await client.Child("Facturas").OnceAsync<Dictionary<string, string>>();
+            string userId = ""; // Inicializa userId con un valor predeterminado
+            foreach (var tarjeta in tarjetas)
+            {
+                if (tarjeta.Object["N_Factrua"] == NumeroFactura)
+                {
+                    userId = tarjeta.Key;
+                    return userId;
+                }
+            }
+
+            return "No encontrado";
+        }
+
 
 
 
@@ -252,7 +268,7 @@ namespace StarBank
             FirebaseClient user = new FirebaseClient("https://proyectostarbank-default-rtdb.firebaseio.com/");
             var usuario = user.Child("Transferencia").OnceAsync<Transacciones>();
 
-            user.Child("Transferencia").PostAsync(new Transacciones { Monto = Monto, Tipo = Tipo, Fecha = Fecha, CuentaO= CuentaO, CuentaD= CuentaD, NombreENVIO= NombreENVIO, NombreRecibe = NombreRecibe });
+            await user.Child("Transferencia").PostAsync(new Transacciones { Monto = Monto, Tipo = Tipo, Fecha = Fecha, CuentaO= CuentaO, CuentaD= CuentaD, NombreENVIO= NombreENVIO, NombreRecibe = NombreRecibe });
 
         }
 
@@ -268,7 +284,44 @@ namespace StarBank
 
         }
 
-       
+
+        public async Task Registrar(String N_Factura, String Nombre,String FechaV,String Consumo,String MontoMora,String montoConsumo,String Total,String Estado)
+        {
+            //Estamos diciendoa nuestra base de datos que añadiremos un usuario
+
+            //Nos pide el nelace de nuestra base de datos :D
+            FirebaseClient user = new FirebaseClient("https://proyectostarbank-default-rtdb.firebaseio.com/");
+            var usuario = user.Child("Facturas").OnceAsync<Servicios>();
+
+            await user.Child("Facturas").PostAsync(new Servicios {N_Factrua= N_Factura,Nombre=Nombre,Fecha= FechaV,Consumo= Consumo, Mora= MontoMora,MontoConsumo= montoConsumo,TotalPagar= Total,Estado=Estado });
+
+        }
+
+
+
+        //Actualizamos algun campo de la base de datos
+        public async Task ActuEstado(string idUsuario, string nombreDato, string nuevoValor)
+        {
+            try
+            {
+                // Construir la ruta completa al nodo que contiene el dato que deseas actualizar
+                var rutaNodo = $"Facturas/{idUsuario}/{nombreDato}";
+
+                // Actualizar el dato utilizando PutAsync
+                await client.Child(rutaNodo).PutAsync(nuevoValor);
+                Console.WriteLine($"Dato {nombreDato} actualizado correctamente para el usuario con ID {idUsuario}");
+            }
+            catch (Exception ex)
+            {
+                // Manejar errores
+                Console.WriteLine($"Error al actualizar el dato: {ex.Message}");
+            }
+        }
+
+
+
+
+
 
     }
 

@@ -57,14 +57,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\agualogo.png" />
 	  <None Remove="Resources\Images\alta.png" />
 	  <None Remove="Resources\Images\atrass.png" />
+	  <None Remove="Resources\Images\eneelogo.png" />
 	  <None Remove="Resources\Images\home.png" />
 	  <None Remove="Resources\Images\icono.png" />
 	  <None Remove="Resources\Images\iconologin.png" />
 	  <None Remove="Resources\Images\perfil.png" />
 	  <None Remove="Resources\Images\salir.png" />
+	  <None Remove="Resources\Images\tarjeta.png" />
 	  <None Remove="Resources\Images\userinop.png" />
+	  <None Remove="Resources\Images\wifilogo.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -85,7 +89,19 @@
 	  <MauiXaml Update="Views\Login.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\PagarAguaPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\PagarLuzPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\PagarWifiPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Registrar.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ServiciosPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\TransCuentaPage.xaml">

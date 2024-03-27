@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StarBank.Views.ServiciosPage"
+             Title="ServiciosPage">
+    <StackLayout>
+        <StackLayout Orientation="Horizontal" BackgroundColor="#2F7142" HeightRequest="56">
+            <Image Source="atrass.png" HeightRequest="40" VerticalOptions="CenterAndExpand" HorizontalOptions="Start" Margin="10,0">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnImageTapped" />
+                </Image.GestureRecognizers>
+            </Image>
+            <Label Text="Servicios" VerticalOptions="Center" HorizontalOptions="Center" TextColor="#FFFFFF" FontSize="20" FontAttributes="Bold" Margin="10,0" FontFamily="Mplus 1p"/>
+        </StackLayout>
+
+        <!-- Datos de cuenta -->
+        <StackLayout Orientation="Horizontal" BackgroundColor="#2F7142" HeightRequest="50">
+            <StackLayout HorizontalOptions="StartAndExpand">
+                <Label Text="N° Cuenta:" VerticalOptions="Center" HorizontalOptions="StartAndExpand" TextColor="#FFFFFF" FontSize="14" FontFamily="Mplus 1p" Margin="10,0"/>
+                <Label x:Name="cuenta"  VerticalOptions="Center" HorizontalOptions="StartAndExpand" TextColor="#FFFFFF" FontSize="14" FontFamily="Mplus 1p" Margin="10,0"/>
+            </StackLayout>
+
+            <StackLayout HorizontalOptions="EndAndExpand">
+                <Label Text="Saldo:" VerticalOptions="Center" HorizontalOptions="EndAndExpand" TextColor="#FFFFFF" FontSize="14" FontFamily="Mplus 1p" Margin="10,0"/>
+                <Label x:Name="saldo" VerticalOptions="Center" HorizontalOptions="EndAndExpand" TextColor="#FFFFFF" FontSize="14" FontFamily="Mplus 1p" Margin="10,0"/>
+            </StackLayout>
+        </StackLayout>
+
+        <StackLayout Padding="15" >
+            <Label Text="Menú de Opciones:" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" TextColor="#2F7142" FontSize="16" FontAttributes="Bold" Margin="10,0" FontFamily="Mplus 1p"/>
+            <Button x:Name="btn_luz" Text="Electricidad" Clicked="btn_luz_Clicked" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" FontSize="14" TextColor="Black" BackgroundColor="White" CornerRadius="0" FontFamily="Mplus 1p" FontAttributes="Bold"/>
+            <Button x:Name="btn_agua" Text="Agua potable" Clicked="btn_agua_Clicked" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" FontSize="14" TextColor="Black" BackgroundColor="White" CornerRadius="0" FontFamily="Mplus 1p" FontAttributes="Bold"/>
+            <Button x:Name="btn_internet" Text="Internet/Cable" Clicked="btn_internet_Clicked" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" FontSize="14" TextColor="Black" BackgroundColor="White" CornerRadius="0" FontFamily="Mplus 1p" FontAttributes="Bold"/>
+            <Button x:Name="btn_eventos" Text="Eventos" Clicked="btn_eventos_Clicked" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" FontSize="14" TextColor="Black" BackgroundColor="White" CornerRadius="0" FontFamily="Mplus 1p" FontAttributes="Bold"/>
+        </StackLayout>
+
+    </StackLayout>
+
+    <ContentPage.BackgroundColor>
+        <Color>#E0E0E0</Color>
+        <!-- Color gris claro en formato hexadecimal -->
+    </ContentPage.BackgroundColor>
+
+</ContentPage>

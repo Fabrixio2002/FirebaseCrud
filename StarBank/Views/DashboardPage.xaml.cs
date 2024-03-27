@@ -28,7 +28,7 @@ public partial class DashboardPage : ContentPage
 
     private  void btn_pagar_Clicked(object sender, EventArgs e)
     {
-       
+        Navigation.PushAsync(new ServiciosPage(ID));//Para cambiar de Pantalla
 
     }
 

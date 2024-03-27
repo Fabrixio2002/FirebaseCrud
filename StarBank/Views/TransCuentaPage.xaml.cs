@@ -69,6 +69,10 @@ public partial class TransCuentaPage : ContentPage
                 await conexionFirebase.RegistrarTransacciones(MointoBD, "Transferencia", fechaComoString, CuentaO, CuentaD, NombreO+""+ApellidoO, NombreD+""+ApellidoD);
 
                 await DisplayAlert("Listo", "Transferencia realizada correctamente.", "Aceptar");
+                txt_cuentaDestino.Text = string.Empty;
+                txt_nameDestino.Text = "Destinatario: --";
+                txt_Monto.Text = string.Empty;
+                txt_descripcion.Text = string.Empty;
 
             }
 
