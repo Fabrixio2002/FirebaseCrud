@@ -1,5 +1,10 @@
 using StarBank.Models;
-
+using StarBank.Models;
+using Firebase.Database;
+using Firebase.Database.Query;
+using StarBank.Models;
+using System.Net;
+using System.Net.Mail;
 namespace StarBank.Views;
 
 public partial class PagarLuzPage : ContentPage
@@ -75,7 +80,14 @@ public partial class PagarLuzPage : ContentPage
                 string CunetaO = await conexionFirebase.ObtenerDatosID<Usuarios>(ID, "N_Cuenta", "Usuarios");
                 string NombreO = await conexionFirebase.ObtenerDatosID<Usuarios>(ID, "Nombre", "Usuarios");
                 string ApellidoO = await conexionFirebase.ObtenerDatosID<Usuarios>(ID, "Apellidos", "Usuarios");
-
+                String nom = await conexionFirebase.ObtenerDatosID<Servicios>(IdFac, "Nombre", "Facturas");
+                String NFac = await conexionFirebase.ObtenerDatosID<Servicios>(IdFac, "N_Factrua", "Facturas");
+                String Fecha = await conexionFirebase.ObtenerDatosID<Servicios>(IdFac, "Fecha", "Facturas");
+                String Consumo = await conexionFirebase.ObtenerDatosID<Servicios>(IdFac, "Consumo", "Facturas");
+                String Mora = await conexionFirebase.ObtenerDatosID<Servicios>(IdFac, "Mora", "Facturas");
+                String Montoconsumo = await conexionFirebase.ObtenerDatosID<Servicios>(IdFac, "MontoConsumo", "Facturas");
+                string correo = await conexionFirebase.ObtenerDatosID<Usuarios>(ID, "Correo", "Usuarios");
+                await EnviarCorreoVerificacion(correo, NFac, nom, Fecha, Consumo, Mora, Montoconsumo, Total);
 
                 await conexionFirebase.RegistrarTransacciones(Factura, "SERVICIO", fechaComoString, CunetaO, "ENEE", NombreO + "" + ApellidoO, "EMPRESA DE ENERGIA ELECTRICA");
                 await DisplayAlert("Listo", "Factura de Energia Electrica Pagada con exito", "Aceptar");
@@ -83,4 +95,61 @@ public partial class PagarLuzPage : ContentPage
             }
         }
     }
+
+
+    public async Task EnviarCorreoVerificacion(string Email, string codigoFactura, string nombreCliente, string fechaVencimiento, string consumo, string montoMora, string montoConsumo, string totalPagar)
+    {
+        var fromAddress = new MailAddress("fabriciojosuegarciapena@gmail.com", "STARBANK");
+        var toAddress = new MailAddress(Email, "Estimado/a Cliente");
+        const string fromPassword = "oliswwttazemnlyn";
+        const string subject = "Detalles de la Factura y Verificación";
+
+        string body = "<html><head><style>" +
+                      "body { font-family: Arial, sans-serif; }" +
+                      "h2 { color: #007bff; }" +
+                      "ul { list-style-type: none; padding: 0; }" +
+                      "li { margin-bottom: 8px; }" +
+                      ".total { font-weight: bold; }" +
+                      ".signature { font-style: italic; font-size: 0.9em; color: #888; }" +
+                      "</style></head><body>" +
+                      "<h2>Estimado/a Cliente,</h2>" +
+                       "<h3>Factura De ELECTRICIDAD,</h3>" +
+                      "<p>Adjunto encontrará los detalles de su factura junto con un código de verificación para garantizar la seguridad de la transacción.</p>" +
+                      "<hr />" + // Línea divisiva
+                      "<ul>" +
+                      "<li><strong>Código de Factura:</strong> " + codigoFactura + "</li>" +
+                      "<li><strong>Nombre:</strong> " + nombreCliente + "</li>" +
+                      "<li><strong>Fecha de Vencimiento:</strong> " + fechaVencimiento + "</li>" +
+                      "<li><strong>Consumo:</strong> " + consumo + "</li>" +
+                      "<li><strong>Monto por Mora:</strong> $" + montoMora + "</li>" +
+                      "<li><strong>Monto por Consumo:</strong> $" + montoConsumo + "</li>" +
+                      "<li class='total'><strong>Total a Pagar:</strong> " + totalPagar + ".Lps</li>" +
+                      "</ul>" +
+                      "<hr />" + // Otra línea divisiva
+                      "<p>Por favor, utilice este código al realizar el pago para verificar su transacción.</p>" +
+                      "<p>Gracias por confiar en STARBANK.</p>" +
+                      "<p class='signature'>Saludos cordiales,<br/>El equipo de STARBANK</p>" +
+                      "</body></html>";
+
+        var smtp = new SmtpClient
+        {
+            Host = "smtp.gmail.com",
+            Port = 587,
+            EnableSsl = true,
+            DeliveryMethod = SmtpDeliveryMethod.Network,
+            UseDefaultCredentials = false,
+            Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+        };
+
+        using (var message = new MailMessage(fromAddress, toAddress)
+        {
+            Subject = subject,
+            Body = body,
+            IsBodyHtml = true // Habilita el formato HTML en el cuerpo del correo
+        })
+        {
+            await smtp.SendMailAsync(message);
+        }
+    }
+
 }

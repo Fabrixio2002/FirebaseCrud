@@ -18,8 +18,8 @@ public partial class TransCuentaPage : ContentPage
     //BOTON DE ATRAS
     private async void OnImageTapped(object sender, EventArgs e)
     {
-        // Navegar a la nueva página cuando se toca la imagen
-        //await Navigation.PushAsync(new TransferPage());
+        //Navegar a la nueva página cuando se toca la imagen
+        await Navigation.PushAsync(new TransferPage(identificador));
     }
 
     private async void btn_transCuenta_Clicked(object sender, EventArgs e)
