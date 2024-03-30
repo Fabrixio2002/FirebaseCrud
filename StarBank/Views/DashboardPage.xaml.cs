@@ -38,8 +38,9 @@ public partial class DashboardPage : ContentPage
         await Navigation.PushAsync(new TransferPage(ID));
     }
 
-    private void btn_control_Clicked(object sender, EventArgs e)
+    private async  void btn_control_Clicked(object sender, EventArgs e)
     {
+        await Navigation.PushAsync(new VerEventosPage());
 
     }
 
