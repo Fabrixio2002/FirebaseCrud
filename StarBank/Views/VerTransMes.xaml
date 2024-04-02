@@ -15,6 +15,25 @@
             </Picker.ItemsSource>
         </Picker>
 
+        <Picker x:Name="MesPicker" Title="Seleccione el mes" SelectedIndexChanged="MesPicker_SelectedIndexChanged">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Enero</x:String>
+                    <x:String>Febrero</x:String>
+                    <x:String>Marzo</x:String>
+                    <x:String>Abril</x:String>
+                    <x:String>Mayo</x:String>
+                    <x:String>Junio</x:String>
+                    <x:String>Julio</x:String>
+                    <x:String>Agosto</x:String>
+                    <x:String>Septiembre</x:String>
+                    <x:String>Octubre</x:String>
+                    <x:String>Noviembre</x:String>
+                    <x:String>Diciembre</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
         <!-- CollectionView para mostrar las transacciones filtradas -->
         <CollectionView x:Name="Eventos" ItemsSource="{Binding eventos}">
             <CollectionView.ItemTemplate>
@@ -22,6 +41,7 @@
                     <StackLayout Padding="10">
                         <Label Text="{Binding CuentaO}" FontAttributes="Bold" />
                         <Label Text="{Binding Tipo}" FontAttributes="Bold" />
+                        <Label Text="{Binding NombreRecibe}" FontAttributes="Bold" />
 
                         <!-- Agrega aquí los otros campos que deseas mostrar -->
                     </StackLayout>
