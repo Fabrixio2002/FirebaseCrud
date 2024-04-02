@@ -40,7 +40,7 @@ public partial class ServiciosPage : ContentPage
 
     private void btn_eventos_Clicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new VerEventosPage());//Para cambiar de Pantalla
+        Navigation.PushAsync(new VerEventosPage(id));//Para cambiar de Pantalla
 
     }
 

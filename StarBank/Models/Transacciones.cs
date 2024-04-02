@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StarBank.Models
 {
-    internal class Transacciones
+    public class Transacciones
     {
         public String Monto { get; set; }
         public String Tipo { get; set; }

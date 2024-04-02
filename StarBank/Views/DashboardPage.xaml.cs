@@ -40,7 +40,7 @@ public partial class DashboardPage : ContentPage
 
     private async  void btn_control_Clicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new VerEventosPage());
+        await Navigation.PushAsync(new VerTransMes(ID));
 
     }
 

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StarBank.Views.VerTransMes"
+             Title="VerTransMes">
+
+    <StackLayout>
+        <Picker x:Name="TipoTransaccionPicker" Title="Seleccione el tipo de transacción" SelectedIndexChanged="TipoTransaccionPicker_SelectedIndexChanged">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Transferencia</x:String>
+                    <x:String>Evento</x:String>
+                    <x:String>Servicio</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <!-- CollectionView para mostrar las transacciones filtradas -->
+        <CollectionView x:Name="Eventos" ItemsSource="{Binding eventos}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="10">
+                        <Label Text="{Binding CuentaO}" FontAttributes="Bold" />
+                        <Label Text="{Binding Tipo}" FontAttributes="Bold" />
+
+                        <!-- Agrega aquí los otros campos que deseas mostrar -->
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>
