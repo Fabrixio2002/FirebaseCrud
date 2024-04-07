@@ -21,8 +21,11 @@ public partial class DashboardPage : ContentPage
     }
 
 
-    private void btn_administrar_Clicked(object sender, EventArgs e)
+    private async void btn_administrar_Clicked(object sender, EventArgs e)
     {
+        await Navigation.PushAsync(new verPerfilPage(ID));
+
+
 
     }
 
@@ -63,6 +66,20 @@ public partial class DashboardPage : ContentPage
         txtBienvenida.Text = "Bienvenido " + nombreUsuario + " " + ApellidoUsuario;
     }
 
+    private async void TapGestureRecognizer_Tapped_1(object sender, TappedEventArgs e)
+    {
+        await Navigation.PushAsync(new verPerfilPage(ID));
+    }
 
+    private async void irEditarperfil(object sender, TappedEventArgs e)
+    {
+        await Navigation.PushAsync(new VerEventosPage(ID));
 
+    }
+
+    private async void irCredito(object sender, TappedEventArgs e)
+    {
+        await Navigation.PushAsync(new AggTarjetaPage(ID));
+
+    }
 }

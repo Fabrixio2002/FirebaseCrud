@@ -13,10 +13,7 @@
                     </Image.GestureRecognizers>
                 </Image>
                 <Label Text="Lista de Eventos" VerticalOptions="Center" HorizontalOptions="Center" TextColor="#FFFFFF" FontSize="20" FontAttributes="Bold" Margin="10,0" FontFamily="Mplus 1p"/>
-                <Image Source="addevento.png" HeightRequest="40" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="10,0">
-                    <Image.GestureRecognizers>
-                    </Image.GestureRecognizers>
-                </Image>
+              
             </StackLayout>
                 <CollectionView x:Name="collectionView" BackgroundColor="White" SelectionMode="Single" SelectionChanged="collectionView_SelectionChanged" Margin="8" >
 

@@ -6,11 +6,14 @@
 
     <StackLayout>
         <!-- Barra de arriba -->
-        <StackLayout Orientation="Horizontal" BackgroundColor="White" HeightRequest="56">
+        <StackLayout Orientation="Horizontal" BackgroundColor="#2F7142" HeightRequest="56">
             <Image Source="iconologin.png" HeightRequest="50" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="10,0"/>
-            <Label Text="Star Bank" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" TextColor="#2F7142" FontSize="20" FontAttributes="Bold" Margin="10,0" FontFamily="Mplus 1p"/>
-            <Image Source="userinop.png" HeightRequest="50" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="10,0"/>
-
+            <Label Text="Star Bank" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" TextColor="#FFFFFF" FontSize="20" FontAttributes="Bold" Margin="10,0" FontFamily="Mplus 1p"/>
+            <Image Source="perfil.png" HeightRequest="35" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="10,0">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1" />
+                </Image.GestureRecognizers>
+            </Image>
         </StackLayout>
 
         <!-- bienvenido -->
@@ -43,8 +46,18 @@
 
         <Grid VerticalOptions="EndAndExpand">
             <StackLayout Orientation="Horizontal" BackgroundColor="#2F7142" HeightRequest="56">
-                <Image Source="home.png" HeightRequest="45" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="15,0"/>
-                <Image Source="perfil.png" HeightRequest="45" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Margin="10,0"/>
+
+                <Image Source="icocredito.png" HeightRequest="45" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="15,0">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="irCredito" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image Source="ticket.png" HeightRequest="45" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Margin="10,0">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="irEditarperfil" />
+                    </Image.GestureRecognizers>
+                </Image>
+
                 <Image Source="salir.png" HeightRequest="45" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="15,0" >
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />

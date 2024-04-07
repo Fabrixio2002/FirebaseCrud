@@ -17,6 +17,7 @@ public partial class VerTransMes : ContentPage
         InitializeComponent();
         BindingContext = this; // Esto establece el contexto de enlace en esta misma página (VerTransMes)
         ID = id;
+         NavigationPage.SetHasNavigationBar(this, false);//ELIMINA EL TOOLBAR  
 
     }
     protected override async void OnAppearing()
@@ -40,6 +41,9 @@ public partial class VerTransMes : ContentPage
             {
                 CuentaO = item.Object.CuentaO,
                 Tipo = item.Object.Tipo,
+                NombreRecibe = item.Object.NombreRecibe,
+                Monto = item.Object.Monto,
+                Fecha=item.Object.Fecha
 
             }).ToList();
 
@@ -106,7 +110,9 @@ public partial class VerTransMes : ContentPage
                         {
                             CuentaO = item.Object.CuentaO,
                             Tipo = item.Object.Tipo,
-                            NombreRecibe=item.Object.NombreRecibe
+                            NombreRecibe = item.Object.NombreRecibe,
+                            Monto = item.Object.Monto,
+                            Fecha = item.Object.Fecha
                             // Agrega otros campos que desees recuperar
                         })
                         .ToList();
@@ -122,7 +128,6 @@ public partial class VerTransMes : ContentPage
                     else
                     {
                         // Muestra un mensaje de alerta si no se encontraron datos
-                        await DisplayAlert("Alerta", "Seleccione un Mes", "Aceptar");
                     }
                 }
                 catch (Exception ex)
@@ -164,7 +169,9 @@ public partial class VerTransMes : ContentPage
                         {
                             CuentaO = item.Object.CuentaO,
                             Tipo = item.Object.Tipo,
-                            NombreRecibe = item.Object.NombreRecibe
+                            NombreRecibe = item.Object.NombreRecibe,
+                            Monto = item.Object.Monto,
+                            Fecha = item.Object.Fecha
                             // Agrega otros campos que desees recuperar
                         })
                         .ToList();
@@ -223,8 +230,9 @@ public partial class VerTransMes : ContentPage
                         {
                             CuentaO = item.Object.CuentaO,
                             Tipo = item.Object.Tipo,
-                            NombreRecibe = item.Object.NombreRecibe
-                            // Agrega otros campos que desees recuperar
+                            NombreRecibe = item.Object.NombreRecibe,
+                            Monto = item.Object.Monto,
+                            Fecha = item.Object.Fecha
                         })
                         .ToList();
 
@@ -321,4 +329,10 @@ public partial class VerTransMes : ContentPage
         }
     }
 
+    private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+
+        await Navigation.PushAsync(new Views.DashboardPage(ID));
+
+    }
 }

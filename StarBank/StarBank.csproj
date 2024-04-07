@@ -57,16 +57,25 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\addevento.png" />
 	  <None Remove="Resources\Images\agualogo.png" />
+	  <None Remove="Resources\Images\alertaerror.png" />
 	  <None Remove="Resources\Images\alta.png" />
 	  <None Remove="Resources\Images\atrass.png" />
+	  <None Remove="Resources\Images\configuracion.png" />
 	  <None Remove="Resources\Images\eneelogo.png" />
+	  <None Remove="Resources\Images\fondos.png" />
 	  <None Remove="Resources\Images\home.png" />
+	  <None Remove="Resources\Images\icocredito.png" />
 	  <None Remove="Resources\Images\icono.png" />
 	  <None Remove="Resources\Images\iconologin.png" />
 	  <None Remove="Resources\Images\perfil.png" />
 	  <None Remove="Resources\Images\salir.png" />
+	  <None Remove="Resources\Images\service.png" />
 	  <None Remove="Resources\Images\tarjeta.png" />
+	  <None Remove="Resources\Images\ticket.png" />
+	  <None Remove="Resources\Images\transferecia.png" />
+	  <None Remove="Resources\Images\user.png" />
 	  <None Remove="Resources\Images\userinop.png" />
 	  <None Remove="Resources\Images\wifilogo.png" />
 	</ItemGroup>
@@ -91,6 +100,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ComprarEventoPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\EditarPerfilPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Login.xaml">
@@ -118,6 +130,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\VerEventosPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\verPerfilPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\VerTransMes.xaml">

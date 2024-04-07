@@ -12,7 +12,11 @@ public partial class Login : ContentPage
 	{
 		InitializeComponent();
         NavigationPage.SetHasNavigationBar(this, false);//ELIMINA EL TOOLBAR
+                                                        // Obtener el último correo electrónico utilizado para iniciar sesión desde las preferencias
+        string lastLoggedInUser = Preferences.Get("LastLoggedInUser", string.Empty);
 
+        // Mostrar el último correo electrónico en el campo de texto
+        txt_email.Text = lastLoggedInUser;
     }
 
     private async void btn_iniciar_Clicked(object sender, EventArgs e)
@@ -28,6 +32,7 @@ public partial class Login : ContentPage
             var credenciales = await conexionFirebase.InicioSesion(email, password);
             txt_email.Text = "";
             txt_password.Text = "";
+            Preferences.Set("LastLoggedInUser", email);
 
         }
     }

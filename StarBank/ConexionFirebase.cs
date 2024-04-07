@@ -218,12 +218,28 @@ namespace StarBank
             }
         }
 
+        public async Task Prueba(string id, string nombreDato, string nuevoValor)
+        {
+            try
+            {
+                // Construir la ruta completa al nodo que contiene el dato que deseas actualizar
+                var rutaNodo = $"Usuarios/{id}/{nombreDato}";
 
+                // Actualizar el dato utilizando PutAsync
+                await client.Child(rutaNodo).PutAsync(nuevoValor);
+                Console.WriteLine($"Dato {nombreDato} actualizado correctamente para el usuario con ID {id}");
+            }
+            catch (Exception ex)
+            {
+                // Manejar errores
+                Console.WriteLine($"Error al actualizar el dato: {ex.Message}");
+            }
+        }
 
 
 
         //Actualizamos algun campo de la base de datos
-        public async Task ActualizarDatoUsuario(string idUsuario, string nombreDato, string nuevoValor)
+        public async Task  ActualizarDatoUsuario(string idUsuario, string nombreDato, string nuevoValor)
         {
             try
             {
@@ -258,6 +274,27 @@ namespace StarBank
                 Console.WriteLine($"Error al actualizar el dato: {ex.Message}");
             }
         }
+
+
+
+        public async Task ActuDato(string idUsuario, string nombreDato, string nuevoValor)
+        {
+            try
+            {
+                // Construir la ruta completa al nodo que contiene el dato que deseas actualizar
+                var rutaNodo = $"Usuarios/{idUsuario}/{nombreDato}";
+
+                // Actualizar el dato utilizando PutAsync
+                await client.Child(rutaNodo).PutAsync(nuevoValor);
+                Console.WriteLine($"Dato {nombreDato} actualizado correctamente para el usuario con ID {idUsuario}");
+            }
+            catch (Exception ex)
+            {
+                // Manejar errores
+                Console.WriteLine($"Error al actualizar el dato: {ex.Message}");
+            }
+        }
+
 
 
         public async Task RegistrarTransacciones(String Monto,String Tipo,String Fecha,String CuentaO,String CuentaD,String NombreENVIO,String NombreRecibe )
