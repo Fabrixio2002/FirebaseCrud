@@ -4,6 +4,7 @@ using Firebase.Database.Query;
 using StarBank.Models;
 using System.Net;
 using System.Net.Mail;
+using MauiPopup;
 namespace StarBank.Views;
 
 public partial class PagarWifiPage : ContentPage
@@ -59,14 +60,14 @@ public partial class PagarWifiPage : ContentPage
         int SaldoActual = Convert.ToInt32(saldoString);
         if (estado == "Pagado")
         {
-            await DisplayAlert("ERROR", "Factura Pagado", "Aceptar");
+            //await DisplayAlert("ERROR", "Factura Pagado", "Aceptar");
 
         }
         else
         {
             if (SaldoActual < totalF)
             {
-                await DisplayAlert("ERROR", "FONDOS INSUFICIENTES", "Aceptar");
+                await PopupAction.DisplayPopup(new PopUp.FondosIns());
                 return;
             }
             else
@@ -90,7 +91,7 @@ public partial class PagarWifiPage : ContentPage
                 await EnviarCorreoVerificacion(correo, NFac, nom, Fecha, Consumo, Mora, Montoconsumo, Total);
 
                 await conexionFirebase.RegistrarTransacciones(Factura, "SERVICIO", fechaComoString, CunetaO, "ENEE", NombreO + "" + ApellidoO, "EMPRESA DE ENERGIA ELECTRICA");
-                await DisplayAlert("Listo", "Factura de Energia Electrica Pagada con exito", "Aceptar");
+                await PopupAction.DisplayPopup(new PopUp.Servicios());
 
             }
         }

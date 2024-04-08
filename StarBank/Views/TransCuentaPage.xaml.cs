@@ -1,3 +1,4 @@
+using MauiPopup;
 using StarBank.Models;
 
 namespace StarBank.Views;
@@ -54,7 +55,7 @@ public partial class TransCuentaPage : ContentPage
             int SaldoActual = Convert.ToInt32(saldoString);
 
             if (SaldoActual<Monto) {
-                await DisplayAlert("ERROR", "FONDOS INSUFICIENTES", "Aceptar");
+               await PopupAction.DisplayPopup(new PopUp.FondosIns());
                 return;
             }
             else
@@ -67,8 +68,8 @@ public partial class TransCuentaPage : ContentPage
                 string fechaComoString = fechaActual.ToString("dd/MM/yyyy"); // Formato personalizado de fecha y hora
 
                 await conexionFirebase.RegistrarTransacciones(MointoBD, "Transferencia", fechaComoString, CuentaO, CuentaD, NombreO+""+ApellidoO, NombreD+""+ApellidoD);
+                await PopupAction.DisplayPopup(new PopUp.Transacciones());
 
-                await DisplayAlert("Listo", "Transferencia realizada correctamente.", "Aceptar");
                 txt_cuentaDestino.Text = string.Empty;
                 txt_nameDestino.Text = "Destinatario: --";
                 txt_Monto.Text = string.Empty;

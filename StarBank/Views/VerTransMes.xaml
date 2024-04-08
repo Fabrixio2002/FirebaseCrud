@@ -4,107 +4,119 @@
              x:Class="StarBank.Views.VerTransMes"
              Title="VerTransMes">
 
-    <StackLayout>
-        <!-- Encabezado -->
-        <StackLayout Orientation="Horizontal" BackgroundColor="#2F7142" HeightRequest="56">
-            <Image Source="atrass.png" HeightRequest="40" VerticalOptions="CenterAndExpand" HorizontalOptions="Start" Margin="10,0">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
-                </Image.GestureRecognizers>
-            </Image>
-            <Label Text="Transferencias" VerticalOptions="Center" HorizontalOptions="Center" TextColor="#FFFFFF" FontSize="20" FontAttributes="Bold" Margin="10,0" FontFamily="Mplus 1p"/>
-        </StackLayout>
+    <ScrollView>
         <StackLayout>
-            <Label Text="Seleccione el tipo de transacción y el mes para ver las transacciones correspondientes." FontSize="16" HorizontalOptions="Center" />
-        </StackLayout>
+            <!-- Encabezado -->
+            <StackLayout Orientation="Horizontal" BackgroundColor="#2F7142" HeightRequest="56">
+                <Image Source="atrass.png" HeightRequest="40" VerticalOptions="CenterAndExpand" HorizontalOptions="Start" Margin="10,0">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Text="Transferencias" VerticalOptions="Center" HorizontalOptions="Center" TextColor="#FFFFFF" FontSize="20" FontAttributes="Bold" Margin="10,0" FontFamily="Mplus 1p"/>
+            </StackLayout>
 
-        <!-- Selector de Tipo de Transacción -->
-        <Picker x:Name="TipoTransaccionPicker" Title="Tipo de Transacción" TitleColor="#007ACC" SelectedIndexChanged="TipoTransaccionPicker_SelectedIndexChanged">
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Transferencia</x:String>
-                    <x:String>Evento</x:String>
-                    <x:String>Servicio</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>
+            <StackLayout Padding="5" BackgroundColor="#E0E0E0">
 
-        <!-- Selector de Mes -->
-        <StackLayout>
-            <Picker x:Name="MesPicker" Title="Mes" TitleColor="#007ACC" SelectedIndexChanged="MesPicker_SelectedIndexChanged">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Enero</x:String>
-                        <x:String>Febrero</x:String>
-                        <x:String>Marzo</x:String>
-                        <x:String>Abril</x:String>
-                        <x:String>Mayo</x:String>
-                        <x:String>Junio</x:String>
-                        <x:String>Julio</x:String>
-                        <x:String>Agosto</x:String>
-                        <x:String>Septiembre</x:String>
-                        <x:String>Octubre</x:String>
-                        <x:String>Noviembre</x:String>
-                        <x:String>Diciembre</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
-            <!-- Etiqueta "Transacciones" -->
-            <Label Text="Transacciones" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+                <StackLayout>
+                    <Label Text="Seleccione el tipo de transacción y el mes para ver las transacciones correspondientes." FontSize="16" HorizontalOptions="Center" />
+                </StackLayout>
+
+                <!-- Selector de Tipo de Transacción -->
+                <Picker x:Name="TipoTransaccionPicker" Title="Tipo de Transacción" TitleColor="#007ACC" SelectedIndexChanged="TipoTransaccionPicker_SelectedIndexChanged">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Transferencia</x:String>
+                            <x:String>Evento</x:String>
+                            <x:String>Servicio</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <!-- Selector de Mes -->
+                <StackLayout>
+                    <Picker x:Name="MesPicker" Title="Mes" TitleColor="#007ACC" SelectedIndexChanged="MesPicker_SelectedIndexChanged">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Enero</x:String>
+                                <x:String>Febrero</x:String>
+                                <x:String>Marzo</x:String>
+                                <x:String>Abril</x:String>
+                                <x:String>Mayo</x:String>
+                                <x:String>Junio</x:String>
+                                <x:String>Julio</x:String>
+                                <x:String>Agosto</x:String>
+                                <x:String>Septiembre</x:String>
+                                <x:String>Octubre</x:String>
+                                <x:String>Noviembre</x:String>
+                                <x:String>Diciembre</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                    <!-- Etiqueta "Transacciones" -->
+                    <Label Text="Transacciones" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+                </StackLayout>
+
+                <!-- Colección de Transacciones -->
+                <CollectionView x:Name="Eventos" ItemsSource="{Binding eventos}" BackgroundColor="#E0E0E0">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="10" Margin="5" CornerRadius="10" BackgroundColor="White" BorderColor="#2F7142" HasShadow="True">
+                                <StackLayout >
+                                    <Label Grid.Column="1" Grid.Row="2" FontSize="Medium" VerticalOptions="Center" Margin="5,0,0,0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Envia: "/>
+                                                <Span Text="{Binding CuentaO}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label Grid.Column="1" Grid.Row="2" FontSize="Medium" VerticalOptions="Center" Margin="5,0,0,0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Transaccion: "/>
+                                                <Span Text="{Binding Tipo}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label Grid.Column="1" Grid.Row="2" FontSize="Medium" VerticalOptions="Center" Margin="5,0,0,0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Recibe: "/>
+                                                <Span Text="{Binding NombreRecibe}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label Grid.Column="1" Grid.Row="2" FontSize="Medium" VerticalOptions="Center" Margin="5,0,0,0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Monto: "/>
+                                                <Span Text="{Binding Monto}" />
+                                                <Span Text=".Lps"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label Grid.Column="1" Grid.Row="2" FontSize="Medium" VerticalOptions="Center" Margin="5,0,0,0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Fecha: "/>
+                                                <Span Text="{Binding Fecha}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <!-- Agrega aquí otros campos que deseas mostrar -->
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
         </StackLayout>
-        <!-- Colección de Transacciones -->
-        <CollectionView x:Name="Eventos" ItemsSource="{Binding eventos}" BackgroundColor="#F4F4F4">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame Padding="10" Margin="5" CornerRadius="10" BackgroundColor="White" BorderColor="#2F7142" HasShadow="True">
-                        <StackLayout >
-                            <Label Grid.Column="1" Grid.Row="2" FontSize="Medium" VerticalOptions="Center" Margin="5,0,0,0">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="Envia: "/>
-                                        <Span Text="{Binding CuentaO}" />
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                            <Label Grid.Column="1" Grid.Row="2" FontSize="Medium" VerticalOptions="Center" Margin="5,0,0,0">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="Transaccion: "/>
-                                        <Span Text="{Binding Tipo}" />
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                            <Label Grid.Column="1" Grid.Row="2" FontSize="Medium" VerticalOptions="Center" Margin="5,0,0,0">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="Recibe: "/>
-                                        <Span Text="{Binding NombreRecibe}" />
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                            <Label Grid.Column="1" Grid.Row="2" FontSize="Medium" VerticalOptions="Center" Margin="5,0,0,0">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="Monto: "/>
-                                        <Span Text="{Binding Monto}" />
-                                        <Span Text=".Lps"/>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                            <Label Grid.Column="1" Grid.Row="2" FontSize="Medium" VerticalOptions="Center" Margin="5,0,0,0">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="Fecha: "/>
-                                        <Span Text="{Binding Fecha}" />
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                            <!-- Agrega aquí otros campos que deseas mostrar -->
-                        </StackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </StackLayout>
+    </ScrollView>
+
+    <ContentPage.BackgroundColor>
+        <Color>#E0E0E0</Color>
+        <!-- Color gris claro en formato hexadecimal -->
+    </ContentPage.BackgroundColor>
 
 </ContentPage>

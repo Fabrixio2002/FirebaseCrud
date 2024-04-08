@@ -1,3 +1,4 @@
+using MauiPopup;
 using Microsoft.Maui.Graphics.Text;
 using StarBank.Models;
 
@@ -64,7 +65,7 @@ public partial class AggTarjetaPage : ContentPage
 
             if (saldoInt < Deposito)
             {
-                await DisplayAlert("ERROR" , "Fondos INSUFICIENTES", "Aceptar");
+                await PopupAction.DisplayPopup(new PopUp.FondosIns());
 
             }
             else
@@ -72,10 +73,10 @@ public partial class AggTarjetaPage : ContentPage
 
                 int NuevoS = saldoInt - Deposito;
                await conexionFirebase.ActualizarDatoTarjeta(IDTarjeta, "Saldo", NuevoS.ToString());
-                await DisplayAlert("Listo", "TRANFERENCIA REALIZADA", "Aceptar");
+               await  PopupAction.DisplayPopup(new PopUp.Transacciones());
                 await conexionFirebase.RegistrarTransacciones(monto, "Tranferencia", fechaComoString, Tarjeta, Cuenta, txt_nameTajeta.Text, nombreUsuario);
                 await conexionFirebase.ActualizarDatoUsuario(ID, "Saldo", nuevosaldo.ToString());
-
+                LimpiarCampos();
             }
 
 
@@ -134,8 +135,16 @@ public partial class AggTarjetaPage : ContentPage
     }
 
 
+    private void LimpiarCampos()
+    {
+     
+ 
+        txt_ciudad.Text = string.Empty;
+        txt_direccion.Text = string.Empty;
+        txt_montoAgg.Text = string.Empty;
+    }
 
 
-  
+
 
 }

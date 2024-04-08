@@ -13,6 +13,7 @@ using System.Net;
 namespace StarBank.Views;
 using Firebase.Database;
 using Firebase.Database.Query;
+using MauiPopup;
 using StarBank.Models;
 using System.Net;
 using System.Net.Mail;
@@ -102,9 +103,7 @@ public partial class Registrar : ContentPage
 
                     // enviamos una alerta hacemos uso de la conexion para llamar al metodo de crear usuario
                     // generamos numero de cue nta actualmente sigue en prueba.
-                    await DisplayAlert("StarBank", "¡USUARIO CREADO CON EXITO!", "OK");
-                    //Creacion  de usuario en el apartado de autenticacion
-                    //funciones de incio y cierre de sesion 
+                   await PopupAction.DisplayPopup(new  PopUp.UsuarioCreado());                    
                     var credenciales = await conexionFirebase.CrearUsuario(correo, contrasenia);
                     string numeroDeCuenta = NumeroDeCuentaGenerator.GenerarNumeroDeCuenta();
 

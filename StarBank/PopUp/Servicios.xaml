@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<popup:BasePopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:popup="clr-namespace:MauiPopup.Views;assembly=MauiPopup"
+             x:Class="StarBank.PopUp.Servicios"
+             Title="Servicios">
+    <!-- POPUP DE SERVICIOS -->
+    <StackLayout BackgroundColor="White" Spacing="20" Padding="15" WidthRequest="280">
+
+        <Label Text="Listo" VerticalOptions="Center" HorizontalOptions="Center" FontSize="20" FontAttributes="Bold" Margin="10,0" FontFamily="Mplus 1p"/>
+
+        <Image Source="service.png" WidthRequest="150" HeightRequest="150"/>
+
+        <Label Text="El servicio fue pagado correctamente" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
+
+        <Button Text="Cerrar" Clicked="Button_Clicked3" TextColor="White" WidthRequest="160" HeightRequest="40"
+        FontSize="14" FontFamily="Mplus 1p" FontAttributes="Bold" BackgroundColor="#2F7142" 
+        Margin="0,15,0,0" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+    </StackLayout>
+</popup:BasePopupPage>

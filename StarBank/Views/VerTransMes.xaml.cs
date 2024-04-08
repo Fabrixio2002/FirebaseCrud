@@ -1,5 +1,6 @@
 using Firebase.Database;
 using Firebase.Database.Query;
+using MauiPopup;
 using StarBank.Models;
 using System.Globalization;
 
@@ -57,14 +58,14 @@ public partial class VerTransMes : ContentPage
             else
             {
                 // Muestra un mensaje de alerta si no se encontraron datos
-                await DisplayAlert("Alerta", "No se encontraron datos de Firebase", "Aceptar");
+                await PopupAction.DisplayPopup(new PopUp.AlertError());
+
             }
         }
         catch (Exception ex)
         {
-            // Muestra un mensaje de alerta si ocurre algún error al recuperar los datos de Firebase
-            await DisplayAlert("Error", $"Error al recuperar datos de Firebase: {ex.Message}", "Aceptar");
-            Console.WriteLine($"Error al recuperar datos de Firebase: {ex.Message}");
+            await PopupAction.DisplayPopup(new PopUp.AlertError());
+
         }
     }
 
@@ -123,7 +124,7 @@ public partial class VerTransMes : ContentPage
                         Eventos.ItemsSource = resultados;
 
                         // Muestra un mensaje de alerta en caso de éxito
-                        await DisplayAlert("Éxito", "Datos de Firebase recuperados correctamente", "Aceptar");
+                        await PopupAction.DisplayPopup(new PopUp.AlertError());
                     }
                     else
                     {
@@ -133,7 +134,7 @@ public partial class VerTransMes : ContentPage
                 catch (Exception ex)
                 {
                     // Muestra un mensaje de alerta si ocurre algún error al recuperar los datos de Firebase
-                    await DisplayAlert("Error", $"Error al recuperar datos", "Aceptar");
+                    await PopupAction.DisplayPopup(new PopUp.AlertError());
                 }
 
 
@@ -182,19 +183,19 @@ public partial class VerTransMes : ContentPage
                         Eventos.ItemsSource = resultados;
 
                         // Muestra un mensaje de alerta en caso de éxito
-                        await DisplayAlert("Éxito", "Datos de Firebase recuperados correctamente", "Aceptar");
+                       // await DisplayAlert("Éxito", "Datos de Firebase recuperados correctamente", "Aceptar");
                     }
                     else
                     {
                         // Muestra un mensaje de alerta si no se encontraron datos
-                        await DisplayAlert("Alerta", "No se encontraron datos de Firebase para los criterios especificados" + Cuenta, "Aceptar");
+                        await PopupAction.DisplayPopup(new PopUp.AlertError());
                     }
                 }
                 catch (Exception ex)
                 {
                     // Muestra un mensaje de alerta si ocurre algún error al recuperar los datos de Firebase
-                    await DisplayAlert("Error", $"Error al recuperar datos de Firebase: {ex.Message}", "Aceptar");
-                    Console.WriteLine($"Error al recuperar datos de Firebase: {ex.Message}");
+                    await PopupAction.DisplayPopup(new PopUp.AlertError());
+
                 }
 
                 break;
@@ -242,19 +243,19 @@ public partial class VerTransMes : ContentPage
                         Eventos.ItemsSource = resultados;
 
                         // Muestra un mensaje de alerta en caso de éxito
-                        await DisplayAlert("Éxito", "Datos de Firebase recuperados correctamente", "Aceptar");
+                      //  await DisplayAlert("Éxito", "Datos de Firebase recuperados correctamente", "Aceptar");
                     }
                     else
                     {
                         // Muestra un mensaje de alerta si no se encontraron datos
-                        await DisplayAlert("Alerta", "No se encontraron datos de Firebase para los criterios especificados" + Cuenta, "Aceptar");
+                        await PopupAction.DisplayPopup(new PopUp.AlertError());
                     }
                 }
                 catch (Exception ex)
                 {
                     // Muestra un mensaje de alerta si ocurre algún error al recuperar los datos de Firebase
-                    await DisplayAlert("Error", $"Error al recuperar datos de Firebase: {ex.Message}", "Aceptar");
-                    Console.WriteLine($"Error al recuperar datos de Firebase: {ex.Message}");
+                    await PopupAction.DisplayPopup(new PopUp.AlertError());
+
                 }
 
 
@@ -313,19 +314,19 @@ public partial class VerTransMes : ContentPage
                 Eventos.ItemsSource = resultados;
 
                 // Muestra un mensaje de alerta en caso de éxito
-                await DisplayAlert("Éxito", "Datos de Firebase recuperados correctamente", "Aceptar");
+                //await DisplayAlert("Éxito", "Datos de Firebase recuperados correctamente", "Aceptar");
             }
             else
             {
                 // Muestra un mensaje de alerta si no se encontraron datos
-                await DisplayAlert("Alerta", "No se encontraron datos de Firebase para los criterios especificados" + Cuenta, "Aceptar");
+                await PopupAction.DisplayPopup(new PopUp.AlertError());
             }
         }
         catch (Exception ex)
         {
             // Muestra un mensaje de alerta si ocurre algún error al recuperar los datos de Firebase
-            await DisplayAlert("Error", $"Error al recuperar datos de Firebase: {ex.Message}", "Aceptar");
-            Console.WriteLine($"Error al recuperar datos de Firebase: {ex.Message}");
+            await PopupAction.DisplayPopup(new PopUp.AlertError());
+
         }
     }
 

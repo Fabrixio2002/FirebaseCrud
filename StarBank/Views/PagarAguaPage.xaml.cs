@@ -6,6 +6,7 @@ using Firebase.Database.Query;
 using StarBank.Models;
 using System.Net;
 using System.Net.Mail;
+using MauiPopup;
 namespace StarBank.Views;
 
 public partial class PagarAguaPage : ContentPage
@@ -66,7 +67,7 @@ public partial class PagarAguaPage : ContentPage
         {
             if (SaldoActual < totalF)
             {
-                await DisplayAlert("ERROR", "FONDOS INSUFICIENTES", "Aceptar");
+                await PopupAction.DisplayPopup(new PopUp.FondosIns());
                 return;
             }
             else
@@ -90,8 +91,7 @@ public partial class PagarAguaPage : ContentPage
 
                 await EnviarCorreoVerificacion(correo, NFac, nom, Fecha, Consumo, Mora, Montoconsumo, Total);
                 await conexionFirebase.RegistrarTransacciones(Factura, "SERVICIO", fechaComoString, CunetaO, "EMPRESA DE AGUA", NombreO + "" + ApellidoO, "EMPRESA DE AGUA");
-                await DisplayAlert("Listo", "Factura de AGUA Pagada con exito", "Aceptar");
-
+               await PopupAction.DisplayPopup(new PopUp.Servicios());
             }
         }
       

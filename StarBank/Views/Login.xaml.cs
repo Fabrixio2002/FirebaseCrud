@@ -23,6 +23,14 @@ public partial class Login : ContentPage
     {
          email = txt_email.Text;
         string password = txt_password.Text;
+
+        if (email == "admin" && password == "admin")
+        {
+            await Navigation.PushAsync(new Views.DashboardAdminPage ());
+
+        }
+        else { 
+
         if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
         {
            await DisplayAlert("Error", "Por favor, ingresa tu correo electrónico y contraseña.", "Aceptar");
@@ -34,6 +42,7 @@ public partial class Login : ContentPage
             txt_password.Text = "";
             Preferences.Set("LastLoggedInUser", email);
 
+        }
         }
     }
 

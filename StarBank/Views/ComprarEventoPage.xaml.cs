@@ -2,6 +2,7 @@
 using StarBank.Models;
 using System.Net.Mail;
 using System.Net;
+using MauiPopup;
 
 
 namespace StarBank.Views;
@@ -58,6 +59,13 @@ public partial class ComprarEventoPage : ContentPage
 
     private async void btn_comprar_Clicked(object sender, EventArgs e)
     {
+
+        if (string.IsNullOrWhiteSpace(txt_cantidad.Text))
+        {
+            // Mostrar un mensaje de error o realizar alguna acción según tus necesidades
+            await PopupAction.DisplayPopup(new PopUp.AlertError()); 
+            return;
+        }
         var saldoString = await conexionFirebase.ObtenerDatosID<Usuarios>(id, "Saldo", "Usuarios");
         int SaldoActual = Convert.ToInt32(saldoString);
         string cantidadTexto = txt_cantidad.Text;
@@ -65,9 +73,10 @@ public partial class ComprarEventoPage : ContentPage
         Double PRecio = double.Parse(PRECIO);
         Double tot = PRecio * cantidad;
         double SaldoOrigen = SaldoActual - tot;
+     
         if (SaldoActual < tot)
         {
-            await DisplayAlert("ERROR", "FONDOS INSUFICIENTES", "Aceptar");
+            await PopupAction.DisplayPopup(new PopUp.FondosIns());
             return;
         }
         else
@@ -83,7 +92,7 @@ public partial class ComprarEventoPage : ContentPage
             await conexionFirebase.RegistrarTransacciones(totalentradas, "EVENTO", fechaComoString, CunetaO, "EVENTOS", NombreO + "" + ApellidoO, TITULO);
          
             await EnviarCorreoVerificacion(correo,TITULO, cantidadTexto,FECHA, PRECIO, totalentradas);
-            await DisplayAlert("lISTO", "eVENTO pAGADO", "Aceptar");
+            await PopupAction.DisplayPopup(new PopUp.Servicios());
 
         }
 
