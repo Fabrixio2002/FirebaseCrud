@@ -8,8 +8,9 @@ namespace StarBank.Models
 {
     public class Eventos
     {
-        
-            public string Titulo { get; set; }
+        public string Id { get; set; }
+
+        public string Titulo { get; set; }
             public string Descripcion { get; set; }
             public string Direccion { get; set; }
             public string Precio { get; set; }

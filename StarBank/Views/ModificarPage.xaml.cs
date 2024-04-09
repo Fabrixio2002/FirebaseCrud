@@ -1,24 +1,41 @@
 using Firebase.Database;
 using Firebase.Database.Query;
+using Firebase.Storage;
 using StarBank.Models;
-using Firebase.Storage; 
 
 namespace StarBank.Views;
 
-public partial class AddEventoPage : ContentPage
+public partial class ModificarPage : ContentPage
 {
-    private string imagenUri;
+    public String ID;
 
-    public AddEventoPage()
-    {
-        InitializeComponent();
+    private string imagenUri;
+    public ModificarPage(Dictionary<string, object> parameters)
+	{
+		InitializeComponent();
         NavigationPage.SetHasNavigationBar(this, false);//ELIMINA EL TOOLBAR
+        if (parameters.ContainsKey("EventoSeleccionado") && parameters.ContainsKey("ImagenUrl"))
+        {
+            var eventoSeleccionado = (Eventos)parameters["EventoSeleccionado"];
+            var imagenUrl = (string)parameters["ImagenUrl"];
+
+            // Utilizar los datos del evento seleccionado para inicializar los campos en la página de modificación
+            // Por ejemplo:
+            txt_titulo.Text = eventoSeleccionado.Titulo;
+            txt_descripcion.Text = eventoSeleccionado.Descripcion;
+            txt_direccion.Text = eventoSeleccionado.Direccion;
+            txt_precio.Text = eventoSeleccionado.Precio;
+            foto.Source = eventoSeleccionado.ImagenUrl;
+            ID = eventoSeleccionado.Id;
+            // Inicializa otros campos según sea necesario
+        }
 
     }
+
     private async void OnImageTapped(object sender, EventArgs e)
     {
         // Navegar a la nueva página cuando se toca la imagen
-         await Navigation.PushAsync(new EventoPage());
+        await Navigation.PushAsync(new EventoPage());
     }
 
     private async void btn_foto_Clicked(object sender, EventArgs e)
@@ -48,51 +65,46 @@ public partial class AddEventoPage : ContentPage
     private async void btn_agregar_Clicked(object sender, EventArgs e)
     {
         if (string.IsNullOrWhiteSpace(txt_titulo.Text) ||
-            string.IsNullOrWhiteSpace(txt_descripcion.Text) ||
-            string.IsNullOrWhiteSpace(txt_direccion.Text) ||
-            string.IsNullOrWhiteSpace(txt_precio.Text) ||
-            string.IsNullOrWhiteSpace(imagenUri))
+       string.IsNullOrWhiteSpace(txt_descripcion.Text) ||
+       string.IsNullOrWhiteSpace(txt_direccion.Text) ||
+       string.IsNullOrWhiteSpace(txt_precio.Text))
         {
             // Mostrar alerta indicando campos vacíos
-            await DisplayAlert("Campos Vacíos", "Por favor, complete todos los campos y seleccione una imagen.", "Aceptar");
+            await DisplayAlert("Campos Vacíos", "Por favor, complete todos los campos.", "Aceptar");
         }
         else
         {
             try
             {
                 string fechaSeleccionadaString = fecha.Date.ToString("dd/MM/yyyy"); // Convierte la fecha seleccionada a una cadena en formato "dd/MM/yyyy"
-                string imageUrl = await SubirImagenFirebaseStorage(imagenUri);
 
-                // Crea un nuevo objeto con los datos del evento
-                var nuevoEvento = new Eventos
+                // Crea un objeto con los datos actualizados del evento
+                var eventoModificado = new Eventos
                 {
+                    Id = ID, // Utiliza el ID del evento existente
                     Titulo = txt_titulo.Text,
                     Descripcion = txt_descripcion.Text,
                     Direccion = txt_direccion.Text,
                     Precio = txt_precio.Text,
                     Fecha = fechaSeleccionadaString,
-                    ImagenUrl = imageUrl // URL de descarga de la imagen
+                    ImagenUrl = imagenUri // La URL de la imagen puede haber cambiado si se seleccionó una nueva
                 };
 
-                // Guarda el nuevo evento en tu base de datos de Firebase
+                // Actualiza el evento en la base de datos de Firebase
                 var firebaseClient = new FirebaseClient("https://proyectostarbank-default-rtdb.firebaseio.com/");
-                var eventoAgregado = await firebaseClient
+                await firebaseClient
                     .Child("Eventos") // Nombre del nodo en la base de datos
-                    .PostAsync(nuevoEvento);
+                    .Child(ID) // ID del evento que se desea modificar
+                    .PutAsync(eventoModificado); // Actualiza los datos del evento con los nuevos datos
 
-                await DisplayAlert("Listo", "Evento guardado correctamente.", "Aceptar");
+                await DisplayAlert("Listo", "Evento modificado correctamente.", "Aceptar");
 
-                // Limpia los campos de entrada después de guardar el evento
-                txt_titulo.Text = string.Empty;
-                txt_descripcion.Text = string.Empty;
-                txt_direccion.Text = string.Empty;
-                txt_precio.Text = string.Empty;
-                fecha.Date = DateTime.Today;
-                imagenUri = null; // Reinicia la URI de la imagen
+                // Vuelve a la página anterior
+                await Navigation.PopAsync();
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", $"Error al guardar el evento: {ex.Message}", "Aceptar");
+                await DisplayAlert("Error", $"Error al modificar el evento: {ex.Message}", "Aceptar");
             }
         }
     }

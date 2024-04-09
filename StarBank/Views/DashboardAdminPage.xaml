@@ -9,7 +9,11 @@
         <StackLayout Orientation="Horizontal" BackgroundColor="#2F7142" HeightRequest="56">
             <Image Source="iconologin.png" HeightRequest="50" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="10,0"/>
             <Label Text="Star Bank" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" TextColor="White" FontSize="20" FontAttributes="Bold" Margin="10,0" FontFamily="Mplus 1p"/>
-            <Image Source="iconologin.png" HeightRequest="50" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="10,0"/>
+            <Image Source="salir.png" HeightRequest="40" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="10,0">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnImageTapped" />
+                </Image.GestureRecognizers>
+            </Image>
 
         </StackLayout>
 
@@ -23,7 +27,8 @@
         <StackLayout Padding="15" >
             <Label Text="Menú de Opciones:" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" TextColor="#2F7142" FontSize="16" FontAttributes="Bold" Margin="10,0" FontFamily="Mplus 1p"/>
             <Button x:Name="btn_gestionarEventos" Text="Gestionar Eventos" Clicked="btn_gestionarEventos_Clicked"  Margin="0,10,0,0" HorizontalOptions="FillAndExpand" FontSize="14" TextColor="Black" BackgroundColor="White" CornerRadius="0" FontFamily="Mplus 1p" FontAttributes="Bold"/>
-            <Button x:Name="btn_historial" Text="Historial General" Clicked="btn_historial_Clicked" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" FontSize="14" TextColor="Black" BackgroundColor="White" CornerRadius="0" FontFamily="Mplus 1p" FontAttributes="Bold"/>
+            <Button x:Name="btn_historial" Text="Administrar Firebase" Clicked="btn_historial_Clicked" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" FontSize="14" TextColor="Black" BackgroundColor="White" CornerRadius="0" FontFamily="Mplus 1p" FontAttributes="Bold"/>
+
         </StackLayout>
 
 

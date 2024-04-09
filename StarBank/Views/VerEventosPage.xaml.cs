@@ -29,6 +29,7 @@ public partial class VerEventosPage : ContentPage
             // Convierte los datos de Firebase en una lista de Eventos
             eventos = eventosSnapshot.Select(item => new Eventos
             {
+
                 Titulo = item.Object.Titulo,
                 Descripcion = item.Object.Descripcion,
                 ImagenUrl = item.Object.ImagenUrl,

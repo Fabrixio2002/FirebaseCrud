@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StarBank.Views.EventoPage"
+             Title="EventoPage">
+    <StackLayout>
+
+ 
+
+        <!-- CONTENIDO DE LOS COLLECTION VIEWS AQUIIIII -->
+        <Grid>
+            <ScrollView >
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" BackgroundColor="#2F7142" HeightRequest="56">
+                        <Image Source="atrass.png" HeightRequest="40" VerticalOptions="CenterAndExpand" HorizontalOptions="Start" Margin="10,0">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnImageTapped" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Label Text="Lista de Eventos" VerticalOptions="Center" HorizontalOptions="Center" TextColor="#FFFFFF" FontSize="20" FontAttributes="Bold" Margin="10,0" FontFamily="Mplus 1p"/>
+                        <Image Source="addevento.png" HeightRequest="40" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="10,0">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </StackLayout>
+                    <CollectionView x:Name="collectionView" BackgroundColor="White" SelectionMode="Single" SelectionChanged="collectionView_SelectionChanged" Margin="8" >
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="5"
+                        
+                            IsClippedToBounds="False">
+                                    <Grid HeightRequest="150">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="3*"/>
+                                            <ColumnDefinition Width="7*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Image Grid.RowSpan="4" Source="{Binding ImagenUrl}" Aspect="AspectFill" Margin="5"/>
+                                        <Label Grid.Column="1" Grid.Row="0" Text="{Binding Titulo}" FontSize="Medium" FontAttributes="Bold" VerticalOptions="Center" Margin="5,0,0,0"/>
+                                        <Label Grid.Column="1" Grid.Row="1" Text="{Binding Descripcion}" FontSize="Medium" VerticalOptions="Center" Margin="5,0,0,0"/>
+                                        <Label Grid.Column="1" Grid.Row="2" FontSize="Medium" VerticalOptions="Center" Margin="5,0,0,0">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Fecha: "/>
+                                                    <Span Text="{Binding Fecha}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label Grid.Column="1" Grid.Row="3" FontSize="Medium" VerticalOptions="Center" Margin="5,0,0,0">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Precio: "/>
+                                                    <Span Text="{Binding Precio}" />
+                                                    <Span Text=" Lps."/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </Grid>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </ScrollView>
+
+        </Grid>
+
+
+        <Grid VerticalOptions="EndAndExpand" Padding="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="0" Orientation="Horizontal" BackgroundColor="#E0E0E0" HeightRequest="56" Margin="0,0,0,10">
+                <Button x:Name="btn_modificar" Text="Modificar evento" Clicked="btn_modificar_Clicked" HorizontalOptions="FillAndExpand" FontSize="14" TextColor="#2F7142" BackgroundColor="White" BorderColor="#2F7142" CornerRadius="10" FontFamily="Mplus 1p" FontAttributes="Bold"/>
+            </StackLayout>
+
+            <StackLayout Grid.Row="1" Orientation="Horizontal" BackgroundColor="#E0E0E0" HeightRequest="56">
+                <Button x:Name="btn_eliminar" Text="Eliminar evento" Clicked="btn_eliminar_Clicked" HorizontalOptions="FillAndExpand" FontSize="14" TextColor="White" BackgroundColor="#D5433A" CornerRadius="10" FontFamily="Mplus 1p" FontAttributes="Bold"/>
+            </StackLayout>
+        </Grid>
+
+    </StackLayout>
+
+    <ContentPage.BackgroundColor>
+        <Color>#E0E0E0</Color>
+        <!-- Color gris claro en formato hexadecimal -->
+    </ContentPage.BackgroundColor>
+</ContentPage>
