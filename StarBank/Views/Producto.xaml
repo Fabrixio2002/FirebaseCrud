@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StarBank.Views.Producto"
+             Title="Producto">
+    <StackLayout>
+        <StackLayout Orientation="Horizontal" BackgroundColor="#2F7142" HeightRequest="56">
+            <Label Text="Agregar Producto" VerticalOptions="Center" HorizontalOptions="Center" TextColor="#FFFFFF" FontSize="20" FontAttributes="Bold" Margin="10,0" FontFamily="Mplus 1p"/>
+        </StackLayout>
+
+
+        <StackLayout Padding="20" BackgroundColor="#E0E0E0">
+
+            <StackLayout Padding="5">
+                <Label Text="Todos los campos son obligatorios" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" TextColor="#2F7142" FontSize="14" FontAttributes="Bold" Margin="10,0" FontFamily="Mplus 1p"/>
+            </StackLayout>
+
+            <StackLayout Padding="20" BackgroundColor="White" Margin="0,0,0,10">
+
+
+                <Button x:Name="btn_foto" Text="Agregar Foto" Clicked="btn_foto_Clicked" HorizontalOptions="Center" FontSize="14" TextColor="#2F7142" BackgroundColor="White" BorderColor="#2F7142" CornerRadius="10" FontFamily="Mplus 1p" FontAttributes="Bold"/>
+
+                <!-- Campo de entrada para el número de tarjeta -->
+                <Entry x:Name="txt_producto" Placeholder="Nombre del producto" PlaceholderColor="#999999" Margin="0,0,0,15"/>
+
+                <!-- Campo de entrada para la ciudad -->
+                <Entry x:Name="txt_descripcion" Placeholder="Describe el producto" PlaceholderColor="#999999" Margin="0,0,0,15"/>
+
+                <!-- Campo de entrada para la ciudad -->
+                <Entry x:Name="txt_precio" Placeholder="Precio por ticket" PlaceholderColor="#999999" Margin="0,0,0,15"/>
+
+            </StackLayout>
+        </StackLayout>
+
+        <Grid VerticalOptions="EndAndExpand" Padding="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="0" Orientation="Horizontal" BackgroundColor="#E0E0E0" HeightRequest="56" Margin="0,0,0,10">
+                <Button x:Name="btn_verLista" Text="Ver Lista" Clicked="btn_verLista_Clicked" HorizontalOptions="FillAndExpand" FontSize="14" TextColor="#2F7142" BackgroundColor="White" BorderColor="#2F7142" CornerRadius="10" FontFamily="Mplus 1p" FontAttributes="Bold"/>
+            </StackLayout>
+
+            <StackLayout Grid.Row="1" Orientation="Horizontal" BackgroundColor="#E0E0E0" HeightRequest="56">
+                <Button x:Name="btn_producto" Text="Agregar Producto" Clicked="btn_guardarproducto_Clicked" HorizontalOptions="FillAndExpand" FontSize="14" TextColor="White" BackgroundColor="#2F7142" CornerRadius="10" FontFamily="Mplus 1p" FontAttributes="Bold"/>
+            </StackLayout>
+        </Grid>
+
+    </StackLayout>
+
+    <ContentPage.BackgroundColor>
+        <Color>#E0E0E0</Color>
+        <!-- Color gris claro en formato hexadecimal -->
+    </ContentPage.BackgroundColor>
+</ContentPage>

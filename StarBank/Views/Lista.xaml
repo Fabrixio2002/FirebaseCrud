@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StarBank.Views.Lista"
+             Title="Lista">
+    <ContentPage.Content>
+        <StackLayout>
+            <!-- Encabezado de la página -->
+            <Label Text="Lista de Productos"
+                   FontSize="Large"
+                   HorizontalOptions="CenterAndExpand"
+                   Margin="0,10"/>
+
+            <!-- Lista de productos -->
+            <ListView x:Name="listViewProductos">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10">
+                                <Label Text="{Binding Nombre}" FontAttributes="Bold"/>
+                                <Label Text="{Binding Descripcion}" FontSize="Small" />
+                                <Label Text="{Binding Precio}" FontSize="Small" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

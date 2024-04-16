@@ -69,7 +69,7 @@ namespace StarBank
 
 
                 //CAMBIAMOS DE PAGINA Y LE MANDAMOS PARAMETROS DE LOS DATOS QUE NECESITAMOS
-                await Application.Current.MainPage.Navigation.PushAsync(new Views.DashboardPage(userId.ToString()));
+               // await Application.Current.MainPage.Navigation.PushAsync(new Views.DashboardPage(userId.ToString()));
 
 
                 return userCredential;
@@ -94,7 +94,7 @@ namespace StarBank
                 var cliente = ConectarFirebase();
                 cliente.SignOut();
                 await Application.Current.MainPage.Navigation.PopToRootAsync();
-                await Application.Current.MainPage.Navigation.PushAsync(new Views.Login());// Redirigir a la página de inicio de sesión después de cerrar sesión
+              //  await Application.Current.MainPage.Navigation.PushAsync(new Views.Login());// Redirigir a la página de inicio de sesión después de cerrar sesión
 
             }
             catch (FirebaseAuthException ex)
@@ -297,42 +297,11 @@ namespace StarBank
 
 
 
-        public async Task RegistrarTransacciones(String Monto,String Tipo,String Fecha,String CuentaO,String CuentaD,String NombreENVIO,String NombreRecibe )
-        {
-            //Estamos diciendoa nuestra base de datos que añadiremos un usuario
 
-            //Nos pide el nelace de nuestra base de datos :D
-            FirebaseClient user = new FirebaseClient("https://proyectostarbank-default-rtdb.firebaseio.com/");
-            var usuario = user.Child("Transferencia").OnceAsync<Transacciones>();
-
-            await user.Child("Transferencia").PostAsync(new Transacciones { Monto = Monto, Tipo = Tipo, Fecha = Fecha, CuentaO= CuentaO, CuentaD= CuentaD, NombreENVIO= NombreENVIO, NombreRecibe = NombreRecibe });
-
-        }
-
-        public async Task RegistrarTarjetas(String Numero, String Nombre,String Saldo)
-        {
-            //Estamos diciendoa nuestra base de datos que añadiremos un usuario
-
-            //Nos pide el nelace de nuestra base de datos :D
-            FirebaseClient user = new FirebaseClient("https://proyectostarbank-default-rtdb.firebaseio.com/");
-            var usuario = user.Child("Tarjetas").OnceAsync<Tarjetas>();
-
-            await user.Child("Tarjetas").PostAsync(new Tarjetas { N_Tarjeta=Numero,Nombre=Nombre,Saldo=Saldo});
-
-        }
+    
 
 
-        public async Task Registrar(String N_Factura, String Nombre,String FechaV,String Consumo,String MontoMora,String montoConsumo,String Total,String Estado)
-        {
-            //Estamos diciendoa nuestra base de datos que añadiremos un usuario
-
-            //Nos pide el nelace de nuestra base de datos :D
-            FirebaseClient user = new FirebaseClient("https://proyectostarbank-default-rtdb.firebaseio.com/");
-            var usuario = user.Child("Facturas").OnceAsync<Servicios>();
-
-            await user.Child("Facturas").PostAsync(new Servicios {N_Factrua= N_Factura,Nombre=Nombre,Fecha= FechaV,Consumo= Consumo, Mora= MontoMora,MontoConsumo= montoConsumo,TotalPagar= Total,Estado=Estado });
-
-        }
+     
 
 
 
